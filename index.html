@@ -68,7 +68,7 @@
     font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
     padding: 6px 14px; border-radius: 2px; margin-bottom: 1.5rem;
   }
-  .hero-tag::before { content: '🍁'; font-size: 0.85rem; }
+  .hero-tag::before { content: '🌍'; font-size: 0.85rem; }
   h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 4.5vw, 4rem); line-height: 1.08; color: var(--ink); margin-bottom: 1rem; }
   h1 em { color: var(--accent); font-style: italic; }
   .hero-subtitle { font-size: 1rem; color: var(--ink-muted); max-width: 500px; margin-bottom: 2rem; line-height: 1.75; }
@@ -162,7 +162,8 @@
   /* TIMELINE */
   .timeline { position: relative; padding-left: 1.5rem; }
   .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, var(--accent), transparent); }
-  .timeline-item { position: relative; padding: 0 0 3rem 2.5rem; opacity: 0; transform: translateX(-18px); transition: all 0.55s ease; }
+  .timeline-item { position: relative; padding: 0 0 3rem 2.5rem; opacity: 1; transform: translateX(0); transition: all 0.55s ease; }
+  .js-loaded .timeline-item { opacity: 0; transform: translateX(-18px); }
   .timeline-item.visible { opacity: 1; transform: translateX(0); }
   .timeline-dot { position: absolute; left: -1.5rem; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
   section:nth-child(even) .timeline-dot { border-color: var(--white); }
@@ -264,7 +265,8 @@
   footer strong { color: var(--accent); }
 
   /* ANIMATIONS */
-  .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .js-loaded .fade-in { opacity: 0; transform: translateY(22px); }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
   /* RESPONSIVE */
@@ -300,7 +302,7 @@
 <section id="hero">
   <div class="hero-bg-grid"></div>
   <div class="hero-content">
-    <div class="hero-tag">Valid Canadian Work Permit · Open to Relocation</div>
+    <div class="hero-tag">Open to Global Opportunities · Immediate Availability</div>
     <h1>Sharvan<br><em>Kumar</em></h1>
     <p class="hero-subtitle">Principal Solution Architect with 17+ years defining enterprise architecture roadmaps and leading digital transformation across government, healthcare, and telecom — from India's national tax network to AT&T's Azure cloud.</p>
     <div class="hero-stats">
@@ -319,7 +321,7 @@
       <div class="avatar-circle">SK<div class="avatar-pulse"></div></div>
       <div class="avatar-name">Sharvan Kumar</div>
       <div class="avatar-title">Principal Solution Architect</div>
-      <div class="avatar-loc">📍 Calgary, AB (Open to Relocation)</div>
+      <div class="avatar-loc">📍 India · Open to Global Relocation</div>
       <div class="avatar-status"><div class="status-dot"></div>AI Avatar Online — Ask me anything</div>
       <div class="quick-prompts">
         <button class="quick-prompt" onclick="askQuestion('What is your healthcare and FHIR experience?')">🏥 Healthcare & FHIR experience?</button>
@@ -337,12 +339,12 @@
   <h2 class="fade-in">Architect of Systems<br>That Actually Matter</h2>
   <div class="about-grid">
     <div class="about-text fade-in">
-      <p>I've spent 17 years building systems that people depend on — not prototypes, but platforms that process taxes for 70 million citizens, handle a billion telecom transactions per day, and serve as the digital backbone for government ministries.</p>
+      <p>I've spent 17 years building systems that people depend on — not prototypes, but platforms that process taxes for 15 million citizens, handle a billion telecom transactions per day, and serve as the digital backbone for government ministries.</p>
       <p>My work sits at the intersection of architecture strategy and delivery: translating complex business and regulatory requirements into scalable, secure, cloud-native solutions — and getting cross-functional teams, executives, and vendors aligned around a shared vision.</p>
       <p>I specialize in regulated, high-stakes environments. Whether it's GSTN's 28-state database architecture, AT&T's legacy-to-Azure migration, or healthcare FHIR/HL7 integration — I've consistently delivered governance frameworks and architecture standards that outlast individual projects.</p>
       <div class="about-permit">
         <div class="about-permit-icon">🌍</div>
-        <p>Holds a valid Canadian Work Permit (through August 2026). Actively pursuing Principal Architect opportunities in Calgary and across Canada. Available immediately.</p>
+        <p>Open to global opportunities — actively exploring senior architect roles in Canada, Germany (EU Blue Card), the Middle East, and beyond. Available immediately for relocation.</p>
       </div>
     </div>
     <div class="about-highlights fade-in">
@@ -632,13 +634,13 @@
 <section id="avatar">
   <div class="section-label">AI Avatar</div>
   <h2>Ask Me Anything</h2>
-  <p class="section-intro">Powered by Claude AI and trained on my full background. Ask anything you'd ask in an interview or discovery call — architecture approach, specific projects, governance experience, or Canadian availability.</p>
+  <p class="section-intro">Powered by Claude AI and trained on my full background. Ask anything you'd ask in an interview or discovery call — architecture approach, specific projects, governance experience, or global availability.</p>
   <div class="chat-container">
     <div class="chat-header">
       <div class="chat-avatar-mini">SK</div>
       <div class="chat-header-info">
         <h4>Sharvan Kumar · AI Avatar</h4>
-        <span>Principal Solution Architect · 17+ years · Canadian Work Permit Holder</span>
+        <span>Principal Solution Architect · 17+ years · Open to Global Opportunities</span>
       </div>
       <div style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:0.73rem;color:rgba(255,255,255,0.45);">
         <div class="status-dot"></div> Online
@@ -701,10 +703,11 @@
   <h2 class="fade-in">Let's Connect</h2>
   <div class="contact-grid">
     <div class="contact-info fade-in">
-      <h3>Open to Global Opportunities · Immediate Availability</h3>
-        <div class="contact-links">
-        <a href="mailto:sharvan.kumar@infosys.com" class="contact-link">
-          <div class="contact-link-icon">📧</div> sharvan.kumar@infosys.com
+      <h3>Open to Global Opportunities</h3>
+      <p>Actively exploring senior Principal Architect roles globally — Canada, Germany (EU Blue Card), the Middle East, and beyond. Available immediately.</p>
+      <div class="contact-links">
+        <a href="/cdn-cgi/l/email-protection#413229203337202f6f2a342c203301282f272e3238326f222e2c" class="contact-link">
+          <div class="contact-link-icon">📧</div> <span class="__cf_email__" data-cfemail="85f6ede4f7f3e4ebabeef0e8e4f7c5ecebe3eaf6fcf6abe6eae8">[email&#160;protected]</span>
         </a>
         <a href="tel:+919999882686" class="contact-link">
           <div class="contact-link-icon">📱</div> +91-9999882686
@@ -713,9 +716,12 @@
           <div class="contact-link-icon">💼</div> linkedin.com/in/sharvankumar
         </a>
         <a href="#" class="contact-link">
-          <div class="contact-link-icon">📍</div> Calgary, AB — Open to Relocation
+          <div class="contact-link-icon">📍</div> India · Open to Global Relocation
         </a>
-          </div>
+        <a href="#" class="contact-link">
+          <div class="contact-link-icon">🌍</div> Canada · Germany · Middle East · Open to All
+        </a>
+      </div>
     </div>
     <div class="fade-in">
       <form class="contact-form" onsubmit="handleFormSubmit(event)">
@@ -743,10 +749,11 @@
 </section>
 
 <footer>
-  <p>© 2025 <strong>Sharvan Kumar</strong> · Principal Solution Architect · Calgary, AB · Built with purpose.</p>
+  <p>© 2025 <strong>Sharvan Kumar</strong> · Principal Solution Architect · Open to Global Opportunities</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.documentElement.classList.add("js-loaded");
 // SCROLL ANIMATIONS
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
@@ -824,7 +831,7 @@ CERTIFICATIONS:
 
 EDUCATION: B.E. Computer Science, M.D.U. Rohtak, India, 2008, 74%
 
-CANADIAN STATUS: Valid Canadian Work Permit through August 2026. Open to relocation to Calgary, AB. Available immediately for Canadian opportunities.
+AVAILABILITY: Open to global relocation. Exploring opportunities in Canada, Germany (EU Blue Card), Middle East, and beyond. Based in Faridabad, India. Available immediately.
 
 PERSONAL: Based in Faridabad, India (NCR region). Married with two daughters.
 
@@ -899,13 +906,4 @@ function askQuestion(text) {
 function handleFormSubmit(e) {
   e.preventDefault();
   document.getElementById('formSuccess').style.display = 'block';
-  e.target.querySelector('button').style.display = 'none';
-  setTimeout(() => {
-    document.getElementById('formSuccess').style.display = 'none';
-    e.target.querySelector('button').style.display = '';
-    e.target.reset();
-  }, 4000);
-}
-</script>
-</body>
-</html>
+  e.target.
