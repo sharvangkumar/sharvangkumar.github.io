@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Certified Architect — Foundations | Sharvan Kumar</title>
+<style>
+:root {
+  --bg:#ffffff;--bg2:#f8f9fa;--bg3:#f1f3f5;
+  --text:#0d0d1a;--text2:#3a3a5c;--text3:#6b6b8a;
+  --accent:#4f46e5;--accent2:#3730a3;--accent3:#6366f1;
+  --success:#059669;--warning:#d97706;--danger:#dc2626;--info:#0284c7;
+  --border:#e5e7eb;--border2:#d1d5db;
+  --code-bg:#0f172a;--code-text:#e2e8f0;
+  --trap-bg:#fff7ed;--trap-border:#ea580c;
+  --tip-bg:#f0fdf4;--tip-border:#16a34a;
+  --quiz-bg:#eff6ff;--quiz-border:#2563eb;
+  --scenario-bg:#faf5ff;--scenario-border:#7c3aed;
+  --cheat-bg:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;}
+
+/* ── COVER ── */
+.cover{background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 40%,#312e81 70%,#4338ca 100%);color:white;padding:80px 40px 60px;text-align:center;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(99,102,241,0.3) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(167,139,250,0.2) 0%,transparent 50%);pointer-events:none;}
+.cover-badge{background:rgba(99,102,241,0.4);border:1px solid rgba(255,255,255,0.3);border-radius:24px;padding:6px 20px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:32px;backdrop-filter:blur(10px);}
+.cover h1{font-size:48px;font-weight:800;margin-bottom:12px;line-height:1.15;background:linear-gradient(135deg,#ffffff,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cover .subtitle{font-size:20px;font-weight:300;opacity:0.85;margin-bottom:8px;}
+.cover .edition{font-size:14px;opacity:0.55;margin-bottom:48px;}
+.cover-divider{width:60px;height:3px;background:linear-gradient(90deg,#6366f1,#a78bfa);border-radius:2px;margin:0 auto 40px;}
+.cover-stats{display:flex;gap:48px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
+.cover-stat .num{font-size:40px;font-weight:800;color:#a5b4fc;}
+.cover-stat .lbl{font-size:12px;opacity:0.65;text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;}
+.author-block{border-top:1px solid rgba(255,255,255,0.2);padding-top:32px;margin-top:8px;}
+.author-name{font-size:20px;font-weight:700;margin-bottom:4px;}
+.author-title{font-size:14px;opacity:0.65;}
+.cover-btn{margin-top:40px;background:linear-gradient(135deg,#6366f1,#4f46e5);color:white;border:none;padding:14px 40px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 24px rgba(99,102,241,0.4);}
+
+/* ── NAV ── */
+.topnav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.topnav .logo{font-weight:800;color:var(--accent2);font-size:15px;display:flex;align-items:center;gap:8px;}
+.topnav .logo span{background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:4px;}
+.nav-links a{color:var(--text3);text-decoration:none;font-size:12px;padding:6px 10px;border-radius:6px;font-weight:500;}
+.nav-links a:hover{background:var(--bg2);color:var(--accent);}
+.pdf-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:8px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;}
+
+/* ── LAYOUT ── */
+.container{max-width:960px;margin:0 auto;padding:48px 24px;}
+
+/* ── ABOUT AUTHOR ── */
+.author-card{background:linear-gradient(135deg,#0f172a,#1e1b4b);color:white;border-radius:16px;padding:40px;margin-bottom:48px;display:flex;gap:32px;align-items:center;}
+.author-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#a78bfa);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;flex-shrink:0;}
+.author-info h3{font-size:22px;font-weight:700;margin-bottom:6px;}
+.author-info .role{color:#a5b4fc;font-size:14px;margin-bottom:12px;}
+.author-info p{font-size:14px;opacity:0.8;line-height:1.7;}
+
+/* ── TOC ── */
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:36px;margin-bottom:56px;}
+.toc-title{font-size:22px;font-weight:800;color:var(--accent2);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.toc-card{background:white;border:1px solid var(--border);border-radius:10px;padding:16px;border-left:4px solid var(--accent);}
+.toc-card:nth-child(2){border-left-color:#7c3aed;}
+.toc-card:nth-child(3){border-left-color:#059669;}
+.toc-card:nth-child(4){border-left-color:#d97706;}
+.toc-card:nth-child(5){border-left-color:#dc2626;}
+.toc-card:nth-child(6){border-left-color:#0284c7;}
+.toc-card:nth-child(7){border-left-color:#0f172a;}
+.toc-card h4{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.toc-card a{display:block;color:var(--text3);text-decoration:none;font-size:12px;padding:2px 0;}
+.toc-card a:hover{color:var(--accent);}
+@media(max-width:640px){.toc-grid{grid-template-columns:1fr;}}
+
+/* ── SECTION ── */
+.section{margin-bottom:72px;}
+.section-header{border-radius:14px 14px 0 0;padding:28px 36px;color:white;}
+.d1-header{background:linear-gradient(135deg,#4f46e5,#3730a3);}
+.d2-header{background:linear-gradient(135deg,#7c3aed,#6d28d9);}
+.d3-header{background:linear-gradient(135deg,#059669,#047857);}
+.d4-header{background:linear-gradient(135deg,#d97706,#b45309);}
+.d5-header{background:linear-gradient(135deg,#dc2626,#b91c1c);}
+.scenario-header{background:linear-gradient(135deg,#0284c7,#0369a1);}
+.cheat-header{background:linear-gradient(135deg,#0f172a,#1e293b);}
+.section-header .domain-tag{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;opacity:0.75;margin-bottom:8px;font-weight:600;}
+.section-header h2{font-size:28px;font-weight:800;margin-bottom:8px;}
+.section-header .domain-weight{display:flex;align-items:center;gap:12px;margin-top:10px;}
+.weight-track{flex:1;height:6px;background:rgba(255,255,255,0.25);border-radius:3px;}
+.weight-fill{height:100%;border-radius:3px;background:rgba(255,255,255,0.85);}
+.weight-pct{font-size:13px;opacity:0.85;white-space:nowrap;}
+.section-body{border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;padding:36px;background:var(--bg);}
+
+/* ── TYPOGRAPHY ── */
+h3{font-size:21px;font-weight:700;margin:36px 0 14px;color:var(--accent2);}
+h4{font-size:17px;font-weight:700;margin:24px 0 10px;color:var(--text);}
+p{margin-bottom:16px;color:var(--text2);}
+ul,ol{padding-left:24px;margin-bottom:16px;}
+li{margin-bottom:8px;color:var(--text2);}
+strong{color:var(--text);}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ── CODE ── */
+pre{background:var(--code-bg);color:var(--code-text);padding:24px 28px;border-radius:10px;overflow-x:auto;font-family:'Cascadia Code','Fira Code',Consolas,monospace;font-size:13px;line-height:1.65;margin:16px 0;border:1px solid #1e293b;}
+code{background:var(--bg3);color:var(--accent2);padding:2px 7px;border-radius:5px;font-family:'Cascadia Code','Fira Code',Consolas,monospace;font-size:13px;}
+pre code{background:none;color:inherit;padding:0;}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+th{background:var(--accent);color:white;padding:12px 16px;text-align:left;font-weight:700;font-size:13px;}
+td{padding:11px 16px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:var(--bg2);}
+
+/* ── CALLOUTS ── */
+.trap{background:var(--trap-bg);border-left:4px solid var(--trap-border);border-radius:0 10px 10px 0;padding:18px 22px;margin:20px 0;}
+.trap-title{font-weight:800;color:var(--trap-border);font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+.trap p{color:var(--text);margin:0;}
+.tip{background:var(--tip-bg);border-left:4px solid var(--tip-border);border-radius:0 10px 10px 0;padding:18px 22px;margin:20px 0;}
+.tip-title{font-weight:800;color:var(--tip-border);font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+.tip p{color:var(--text);margin:0;}
+.info-box{background:var(--quiz-bg);border-left:4px solid var(--info);border-radius:0 10px 10px 0;padding:18px 22px;margin:20px 0;}
+.info-box p{color:var(--text);margin:0;}
+
+/* ── EXERCISE ── */
+.exercise{border:2px solid var(--accent);border-radius:12px;margin:24px 0;overflow:hidden;}
+.exercise-header{background:var(--accent);color:white;padding:12px 22px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;}
+.exercise-body{padding:22px;}
+
+/* ── SCENARIO ── */
+.scenario-card{background:var(--scenario-bg);border:1px solid var(--scenario-border);border-radius:12px;padding:28px;margin:20px 0;}
+.scenario-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#7c3aed;margin-bottom:8px;}
+.scenario-card h4{font-size:18px;color:#4c1d95;margin:0 0 12px;}
+.scenario-card p{color:var(--text2);font-size:14px;margin-bottom:12px;}
+.scenario-q{background:white;border:1px solid var(--border);border-radius:8px;padding:16px;margin:12px 0;}
+.scenario-q .q-text{font-weight:600;font-size:14px;color:var(--text);margin-bottom:10px;}
+.scenario-a{background:var(--tip-bg);border-left:3px solid var(--tip-border);padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:var(--text);display:none;margin-top:8px;}
+
+/* ── QUIZ ── */
+.quiz-section{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:32px;margin-top:36px;}
+.quiz-section>h3{margin-top:0;}
+.quiz-item{background:white;border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:16px;transition:box-shadow 0.2s;}
+.quiz-item:hover{box-shadow:0 4px 16px rgba(79,70,229,0.08);}
+.quiz-q{font-weight:700;color:var(--text);margin-bottom:14px;font-size:15px;}
+.quiz-options{list-style:none;padding:0;}
+.quiz-options li{padding:10px 14px;border-radius:8px;margin-bottom:6px;cursor:pointer;border:1px solid var(--border);font-size:14px;color:var(--text2);transition:all 0.15s;}
+.quiz-options li:hover{background:var(--quiz-bg);border-color:var(--quiz-border);}
+.quiz-options li.selected{background:var(--quiz-bg);border-color:var(--quiz-border);}
+.quiz-answer{display:none;margin-top:14px;padding:14px 18px;background:var(--tip-bg);border-left:3px solid var(--tip-border);border-radius:0 8px 8px 0;font-size:14px;color:var(--text);}
+.reveal-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:8px 18px;border-radius:7px;cursor:pointer;font-size:13px;font-weight:600;margin-top:10px;}
+
+/* ── CHEAT SHEET ── */
+.cheat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:16px;}
+.cheat-card{background:#1e293b;border:1px solid #334155;border-radius:10px;padding:20px;}
+.cheat-card h4{font-size:13px;font-weight:700;color:#a5b4fc;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;}
+.cheat-card .item{font-size:13px;color:#e2e8f0;padding:5px 0;border-bottom:1px solid #334155;display:flex;gap:8px;}
+.cheat-card .item:last-child{border-bottom:none;}
+.cheat-card .item .key{color:#7dd3fc;font-family:monospace;font-size:12px;min-width:80px;flex-shrink:0;}
+.cheat-card .item .val{color:#cbd5e1;}
+
+/* ── GLOSSARY ── */
+.glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+.gloss-item{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 18px;}
+.gloss-item .term{font-weight:700;color:var(--accent2);font-size:14px;margin-bottom:4px;}
+.gloss-item .def{font-size:13px;color:var(--text2);}
+@media(max-width:640px){.glossary-grid{grid-template-columns:1fr;}}
+
+/* ── REFS ── */
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:16px;}
+.ref-card{border:1px solid var(--border);border-radius:10px;padding:18px;background:var(--bg2);border-top:3px solid var(--accent);}
+.ref-card h4{font-size:14px;font-weight:700;margin:0 0 6px;color:var(--text);}
+.ref-card a{font-size:13px;color:var(--accent);word-break:break-all;}
+.ref-card p{font-size:13px;margin:6px 0 0;color:var(--text3);}
+
+/* ── TRAPS TABLE ── */
+.traps-table th{background:#0f172a;}
+.traps-table tr:nth-child(even) td{background:#fafafa;}
+
+/* ── DIVIDER ── */
+.divider{border:none;border-top:2px solid var(--border);margin:56px 0;}
+
+/* ── PRINT ── */
+@media print{
+  .topnav,.cover-btn,.reveal-btn,.no-print{display:none!important;}
+  .cover{min-height:auto;padding:60px 40px;page-break-after:always;}
+  .quiz-answer,.scenario-a{display:block!important;}
+  body{font-size:13px;}
+  pre{font-size:11px;}
+  .section{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover" id="top">
+  <div class="cover-badge">Complete Study Guide · 2025 Edition</div>
+  <h1>Claude Certified Architect</h1>
+  <div class="subtitle">Foundations Certification</div>
+  <div class="edition">Official Exam Preparation Guide</div>
+  <div class="cover-divider"></div>
+  <div class="cover-stats">
+    <div class="cover-stat"><div class="num">5</div><div class="lbl">Domains</div></div>
+    <div class="cover-stat"><div class="num">50+</div><div class="lbl">Practice Questions</div></div>
+    <div class="cover-stat"><div class="num">6</div><div class="lbl">Exam Scenarios</div></div>
+    <div class="cover-stat"><div class="num">720</div><div class="lbl">Passing Score</div></div>
+  </div>
+  <div class="author-block">
+    <div class="author-name">Sharvan Kumar</div>
+    <div class="author-title">Solution Architect | AI Builder</div>
+  </div>
+  <a href="#toc" class="cover-btn no-print">Start Reading →</a>
+</div>
+
+<!-- NAV -->
+<div class="topnav no-print">
+  <div class="logo"><span>Claude Architect</span> Study Guide</div>
+  <div class="nav-links">
+    <a href="#domain1">D1</a><a href="#domain2">D2</a><a href="#domain3">D3</a>
+    <a href="#domain4">D4</a><a href="#domain5">D5</a>
+    <a href="#scenarios">Scenarios</a><a href="#cheatsheet">Cheat Sheet</a>
+    <a href="#glossary">Glossary</a>
+  </div>
+  <button class="pdf-btn" onclick="window.print()">Save as PDF</button>
+</div>
+
+<div class="container">
+
+<!-- ABOUT AUTHOR -->
+<div class="author-card">
+  <div class="author-avatar">SK</div>
+  <div class="author-info">
+    <h3>Sharvan Kumar</h3>
+    <div class="role">Solution Architect | AI Builder</div>
+    <p>Enterprise architect with hands-on experience building production AI systems using the Claude API, Claude Agent SDK, and Model Context Protocol. This guide was built while preparing for the Claude Certified Architect — Foundations exam, combining official exam content with practical exercises and real terminal output from actual coding sessions.</p>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc" id="toc">
+  <div class="toc-title">Table of Contents</div>
+  <div class="toc-grid">
+    <div class="toc-card">
+      <h4>Domain 1 — Agentic Architecture (27%)</h4>
+      <a href="#d1-loop">The Agentic Loop</a>
+      <a href="#d1-multiagent">Multi-Agent Orchestration</a>
+      <a href="#d1-hooks">SDK Hooks</a>
+      <a href="#d1-session">Session Management</a>
+      <a href="#d1-quiz">10 Quiz Questions</a>
+    </div>
+    <div class="toc-card">
+      <h4>Domain 2 — Tool Design &amp; MCP (18%)</h4>
+      <a href="#d2-descriptions">Tool Descriptions</a>
+      <a href="#d2-errors">Structured Errors</a>
+      <a href="#d2-distribution">Tool Distribution</a>
+      <a href="#d2-mcp">MCP Configuration</a>
+      <a href="#d2-quiz">10 Quiz Questions</a>
+    </div>
+    <div class="toc-card">
+      <h4>Domain 3 — Claude Code (20%)</h4>
+      <a href="#d3-claudemd">CLAUDE.md Hierarchy</a>
+      <a href="#d3-rules">Path-Scoped Rules</a>
+      <a href="#d3-skills">Skills &amp; Commands</a>
+      <a href="#d3-planmode">Plan Mode</a>
+      <a href="#d3-quiz">10 Quiz Questions</a>
+    </div>
+    <div class="toc-card">
+      <h4>Domain 4 — Prompt Engineering (20%)</h4>
+      <a href="#d4-tooluse">tool_use &amp; JSON Schema</a>
+      <a href="#d4-fewshot">Few-Shot Prompting</a>
+      <a href="#d4-validation">Validation &amp; Retry</a>
+      <a href="#d4-batch">Batch Processing</a>
+      <a href="#d4-quiz">10 Quiz Questions</a>
+    </div>
+    <div class="toc-card">
+      <h4>Domain 5 — Context Management (15%)</h4>
+      <a href="#d5-lostmiddle">Lost in the Middle</a>
+      <a href="#d5-casefacts">Case Facts Block</a>
+      <a href="#d5-trimming">Tool Output Trimming</a>
+      <a href="#d5-errors">Error Propagation</a>
+      <a href="#d5-quiz">10 Quiz Questions</a>
+    </div>
+    <div class="toc-card">
+      <h4>All 6 Exam Scenarios</h4>
+      <a href="#sc1">Customer Support Agent</a>
+      <a href="#sc2">Code Generation</a>
+      <a href="#sc3">Multi-Agent Research</a>
+      <a href="#sc4">Developer Productivity</a>
+      <a href="#sc5">CI/CD Integration</a>
+      <a href="#sc6">Structured Data Extraction</a>
+    </div>
+    <div class="toc-card">
+      <h4>Quick Reference</h4>
+      <a href="#cheatsheet">Cheat Sheet Cards</a>
+      <a href="#trapstable">Top 10 Exam Traps</a>
+      <a href="#glossary">Glossary of Terms</a>
+      <a href="#refs">Online References</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DOMAIN 1 ══════════ -->
+<div class="section" id="domain1">
+  <div class="section-header d1-header">
+    <div class="domain-tag">Domain 1 · Highest Exam Weight</div>
+    <h2>Agentic Architecture &amp; Orchestration</h2>
+    <div class="domain-weight">
+      <div class="weight-track"><div class="weight-fill" style="width:27%"></div></div>
+      <span class="weight-pct">27% of scored content</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <h3 id="d1-loop">The Agentic Loop</h3>
+    <p>Every Claude agent runs on the same fundamental loop. Your code sends messages, Claude reasons and either calls a tool or finishes. You react to <code>stop_reason</code>.</p>
+
+    <table>
+      <tr><th>stop_reason</th><th>Meaning</th><th>Your code does</th></tr>
+      <tr><td><code>"tool_use"</code></td><td>Claude wants to call a tool before finishing</td><td>Execute tool → append result → send again</td></tr>
+      <tr><td><code>"end_turn"</code></td><td>Claude is done — final answer ready</td><td>Read response.content[0].text → exit loop</td></tr>
+    </table>
+
+    <div class="exercise">
+      <div class="exercise-header">Complete Agentic Loop — Production Pattern</div>
+      <div class="exercise-body">
+<pre>import anthropic, json
+
+client = anthropic.Anthropic()
+
+def run_agent(user_message: str, tools: list, system: str = ""):
+    messages = [{"role": "user", "content": user_message}]
+    iteration = 0
+    MAX_ITER = 20  # safety cap — NOT the primary stopping mechanism
+
+    while iteration < MAX_ITER:
+        iteration += 1
+
+        response = client.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=1000,
+            system=system,
+            tools=tools,
+            messages=messages
+        )
+
+        # ✅ CORRECT — stop_reason drives loop control
+        if response.stop_reason == "end_turn":
+            for block in response.content:
+                if hasattr(block, "text"):
+                    return block.text
+            break
+
+        elif response.stop_reason == "tool_use":
+            # Append Claude's full response (with tool calls) to history
+            messages.append({
+                "role": "assistant",
+                "content": response.content
+            })
+
+            # Execute every tool Claude requested
+            tool_results = []
+            for block in response.content:
+                if block.type == "tool_use":
+                    result = execute_tool(block.name, block.input)
+                    tool_results.append({
+                        "type": "tool_result",
+                        "tool_use_id": block.id,
+                        "content": json.dumps(result)
+                    })
+
+            # Append all results and loop again
+            messages.append({"role": "user", "content": tool_results})</pre>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="trap-title">⚠ Exam Trap — Loop Anti-Patterns (These Are Wrong)</div>
+      <p>
+        ❌ Checking if response text contains "I have completed" or similar<br>
+        ❌ Using an iteration cap as the PRIMARY stopping mechanism<br>
+        ❌ Checking for assistant text content as a completion indicator<br>
+        ❌ Parsing natural language signals to determine loop termination<br><br>
+        ✅ One correct answer: <strong>stop when stop_reason == "end_turn"</strong>
+      </p>
+    </div>
+
+    <h3 id="d1-multiagent">Multi-Agent Orchestration</h3>
+    <p>Hub-and-spoke architecture: the coordinator manages all communication, error handling, and routing. Subagents are specialists with isolated context.</p>
+
+    <div class="info-box">
+      <p><strong>The most tested fact about subagents:</strong> They have ZERO automatic context inheritance. They cannot see what the coordinator knows. You must explicitly inject everything they need directly into their prompt.</p>
+    </div>
+
+<pre># ✅ CORRECT — explicit context injection to subagent
+web_search_results = "... [findings from web search agent] ..."
+doc_analysis_results = "... [findings from document analysis agent] ..."
+
+synthesis_prompt = f"""
+You are a synthesis agent. Combine these research findings into a report.
+
+WEB SEARCH FINDINGS:
+{web_search_results}
+
+DOCUMENT ANALYSIS FINDINGS:
+{doc_analysis_results}
+
+Synthesize into a comprehensive report with source attribution.
+"""
+# The subagent now has everything it needs — explicitly provided</pre>
+
+    <h4>Parallel vs Sequential Subagent Execution</h4>
+<pre># ✅ PARALLEL — emit multiple Task calls in ONE coordinator response
+# Both subagents run simultaneously
+coordinator_emits = [
+    {
+        "type": "tool_use", "name": "Task", "id": "task_001",
+        "input": {"subagent": "web_search",
+                  "prompt": "Find recent EU AI regulation developments 2025"}
+    },
+    {
+        "type": "tool_use", "name": "Task", "id": "task_002",
+        "input": {"subagent": "doc_analysis",
+                  "prompt": "Analyse the EU AI Act PDF for compliance requirements"}
+    }
+    # Key: both Task calls in ONE response = parallel execution
+]
+
+# ❌ SEQUENTIAL — Task calls across separate turns = slower
+# Turn 1: emit Task for web_search → wait for result
+# Turn 2: emit Task for doc_analysis → wait for result</pre>
+
+    <div class="trap">
+      <div class="trap-title">⚠ Exam Trap — Task Tool Configuration</div>
+      <p>For a coordinator to spawn subagents, <code>allowedTools</code> must explicitly include <code>"Task"</code>. Without this, the coordinator cannot invoke subagents regardless of what its system prompt says.</p>
+    </div>
+
+    <h3 id="d1-hooks">SDK Hooks</h3>
+    <table>
+      <tr><th>Hook</th><th>Fires when</th><th>Primary use case</th></tr>
+      <tr><td><code>PostToolUse</code></td><td>After tool executes, before Claude sees result</td><td>Normalize data formats — timestamps, status codes, currencies</td></tr>
+      <tr><td>Pre-tool interception</td><td>Before tool executes</td><td>Block policy violations — refund above threshold, restricted accounts</td></tr>
+    </table>
+
+<pre># PostToolUse hook — normalize heterogeneous tool outputs
+def post_tool_use_hook(tool_name: str, tool_result: dict) -> dict:
+    """Normalize formats before Claude processes the result"""
+
+    if tool_name == "get_order":
+        # Convert Unix timestamp to readable format
+        if "created_at_unix" in tool_result:
+            tool_result["created_at"] = datetime.fromtimestamp(
+                tool_result["created_at_unix"]
+            ).isoformat()
+
+        # Convert numeric status codes to labels
+        status_map = {1: "placed", 3: "shipped", 7: "delivered", 9: "returned"}
+        tool_result["status"] = status_map.get(tool_result.get("status_code"), "unknown")
+
+    return tool_result
+
+# Pre-tool interception hook — enforce business rules
+def pre_tool_hook(tool_name: str, tool_input: dict) -> dict | None:
+    """Return None to block, return modified input to allow"""
+
+    if tool_name == "process_refund":
+        amount = tool_input.get("amount", 0)
+        if amount > 10000:
+            # Block and redirect to escalation
+            return None  # signals: do not execute this tool call
+    return tool_input  # allow the tool to proceed</pre>
+
+    <div class="tip">
+      <div class="tip-title">✓ Hooks vs Prompt Instructions</div>
+      <p>Hooks give <strong>deterministic guarantees</strong>. Prompt instructions give <strong>probabilistic compliance</strong>.<br><br>
+      When a business rule has financial or compliance consequences (identity verification before refunds, blocking operations above a threshold), use hooks — not instructions. Prompt instructions have a non-zero failure rate even when written perfectly.</p>
+    </div>
+
+    <h3 id="d1-session">Session Management</h3>
+    <table>
+      <tr><th>Mechanism</th><th>When to use</th><th>When NOT to use</th></tr>
+      <tr><td><code>--resume &lt;name&gt;</code></td><td>Prior context is valid, continuing same investigation</td><td>Files have changed since last session</td></tr>
+      <tr><td><code>fork_session</code></td><td>Exploring two divergent approaches from same baseline</td><td>Starting completely fresh investigation</td></tr>
+      <tr><td>New session + summary</td><td>Prior tool results are stale after code changes</td><td>When prior context is still fully valid</td></tr>
+    </table>
+
+    <!-- DOMAIN 1 QUIZ -->
+    <div class="quiz-section" id="d1-quiz">
+      <h3>Domain 1 — Practice Questions (10)</h3>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q1. Your agent skips get_customer and calls process_refund directly in 8% of cases, causing financial errors. What is the most effective fix?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Add a programmatic prerequisite blocking process_refund until get_customer returns a verified customer ID</li>
+          <li onclick="sel(this)">B) Enhance the system prompt: "always call get_customer before any financial operations"</li>
+          <li onclick="sel(this)">C) Add 5-8 few-shot examples showing correct tool ordering</li>
+          <li onclick="sel(this)">D) Implement a classifier that restricts available tools based on conversation stage</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>A</strong> — Programmatic enforcement is deterministic. Options B and C are probabilistic — prompt instructions have a non-zero failure rate. At 8% failure rate on financial operations, prompt-based approaches are insufficient.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q2. A coordinator emits two Task tool calls in a single response. What is the execution pattern?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) The second Task waits for the first to complete before starting</li>
+          <li onclick="sel(this)">B) Both subagents execute in parallel simultaneously</li>
+          <li onclick="sel(this)">C) The coordinator selects whichever Task is most relevant</li>
+          <li onclick="sel(this)">D) The second Task is ignored — only one Task per turn is supported</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Multiple Task tool calls in one coordinator response = parallel execution. This is how you achieve concurrent subagent processing rather than sequential.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q3. Your research system covers only technology topics when asked to research "global supply chain disruptions." Each subagent completed successfully. Root cause?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) The synthesis agent filtered out non-technology findings</li>
+          <li onclick="sel(this)">B) The coordinator's task decomposition was too narrow — only assigned technology subtasks</li>
+          <li onclick="sel(this)">C) The web search agent used technology-biased search queries</li>
+          <li onclick="sel(this)">D) The document analysis agent used overly restrictive relevance criteria</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Subagents executed their assigned scope correctly. The coordinator decomposed "supply chain disruptions" into only technology subtasks, missing economics, geopolitics, and logistics. The problem is what they were assigned, not how they performed.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q4. Your agentic loop checks: "if 'task complete' appears in Claude's response, exit loop." What is wrong with this approach?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Claude may not always include those exact words</li>
+          <li onclick="sel(this)">B) It's a natural language signal anti-pattern — loop termination must be driven by stop_reason == "end_turn", not text content</li>
+          <li onclick="sel(this)">C) Response parsing is too slow for production systems</li>
+          <li onclick="sel(this)">D) Text content is not available when stop_reason is "tool_use"</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Parsing natural language signals for loop termination is an explicit anti-pattern. The only reliable termination condition is stop_reason == "end_turn". Claude controls when it's done — your code should respect that signal.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q5. A synthesis subagent needs findings from the web search and document analysis subagents. How does it receive this information?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Subagents automatically share a common memory space</li>
+          <li onclick="sel(this)">B) The coordinator injects all findings explicitly into the synthesis subagent's prompt</li>
+          <li onclick="sel(this)">C) The synthesis agent reads results directly from previous subagents' output files</li>
+          <li onclick="sel(this)">D) The Agent SDK passes context between subagents automatically</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Subagents have zero automatic context inheritance. The coordinator must explicitly inject all required findings into the synthesis subagent's prompt. Nothing is shared automatically.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q6. Your PostToolUse hook normalizes Unix timestamps to ISO 8601 format. When does this hook fire?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Before the tool executes, so Claude sees normalized inputs</li>
+          <li onclick="sel(this)">B) After the tool executes but before Claude processes the result</li>
+          <li onclick="sel(this)">C) After Claude processes the result, as post-processing cleanup</li>
+          <li onclick="sel(this)">D) When Claude decides which tool to call next</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — PostToolUse fires after tool execution but before Claude sees the result. This is the correct position to normalize data so Claude always receives consistent, well-formatted tool outputs.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q7. When should you choose fork_session over --resume?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) When the prior session's tool results are stale after code changes</li>
+          <li onclick="sel(this)">B) When you want to explore two divergent approaches from a shared analysis baseline simultaneously</li>
+          <li onclick="sel(this)">C) When the session name is not known</li>
+          <li onclick="sel(this)">D) When the codebase is too large for a single session</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — fork_session creates independent branches from a shared baseline for divergent exploration. --resume continues the same session. For stale results, start a new session with an injected summary.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q8. A refund of ₹15,000 needs manager approval. You add "never process refunds above ₹10,000 without escalation" to the system prompt. Is this sufficient?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Yes — explicit instructions in system prompts are always followed</li>
+          <li onclick="sel(this)">B) No — prompt instructions have a non-zero failure rate; use a pre-tool interception hook for deterministic enforcement</li>
+          <li onclick="sel(this)">C) Yes — but only if few-shot examples are also provided</li>
+          <li onclick="sel(this)">D) No — system prompts cannot reference specific monetary amounts</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — For business rules with financial consequences, prompt instructions are insufficient. A pre-tool interception hook provides deterministic guarantees — it physically blocks the tool call if the threshold is exceeded.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q9. What must allowedTools include for a coordinator to spawn subagents?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) The names of all subagent types</li>
+          <li onclick="sel(this)">B) "Task"</li>
+          <li onclick="sel(this)">C) "SubAgent"</li>
+          <li onclick="sel(this)">D) "Delegate"</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — "Task" is the specific mechanism for spawning subagents in the Claude Agent SDK. Without "Task" in allowedTools, the coordinator cannot invoke subagents regardless of other configuration.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q10. After resuming a session, the agent references the state of a file that was refactored since the session ended. What should you do?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Always start a new session — resumed sessions can never account for code changes</li>
+          <li onclick="sel(this)">B) Inform the agent about the specific file changes for targeted re-analysis rather than requiring full re-exploration</li>
+          <li onclick="sel(this)">C) Use fork_session to create a branch with the updated files</li>
+          <li onclick="sel(this)">D) The session automatically detects file changes and updates its understanding</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — When resuming after code changes, inform the agent about specific changed files for targeted re-analysis. This is more efficient than full re-exploration and more accurate than ignoring the changes.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DOMAIN 2 ══════════ -->
+<div class="section" id="domain2">
+  <div class="section-header d2-header">
+    <div class="domain-tag">Domain 2</div>
+    <h2>Tool Design &amp; MCP Integration</h2>
+    <div class="domain-weight">
+      <div class="weight-track"><div class="weight-fill" style="width:18%"></div></div>
+      <span class="weight-pct">18% of scored content</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <h3 id="d2-descriptions">Writing Effective Tool Descriptions</h3>
+    <p>Tool descriptions are the routing table Claude uses for tool selection. Minimal descriptions cause misrouting. Good descriptions include: purpose, expected inputs, example queries, edge cases, and explicit boundaries.</p>
+
+<pre># ❌ BAD — causes misrouting between similar tools
+{"name": "analyze_content", "description": "Analyzes content"}
+{"name": "analyze_document", "description": "Analyzes documents"}
+# Near-identical descriptions = Claude picks randomly
+
+# ✅ GOOD — clear differentiation with boundaries
+{
+    "name": "extract_web_results",
+    "description": """Extracts structured data from web search HTML or JSON.
+USE FOR: raw content fetched from a URL, news article, or web page.
+INPUT: Raw HTML, JSON response, or plain text from a web source.
+OUTPUT: Structured findings with source URLs, titles, key facts.
+DO NOT USE FOR: PDF files, uploaded documents, database exports."""
+},
+{
+    "name": "analyze_document",
+    "description": """Analyzes uploaded documents — PDF, DOCX, structured text.
+USE FOR: uploaded files — research papers, contracts, reports, specs.
+INPUT: Document text content extracted from a file.
+OUTPUT: Key claims, methodology, data points with page references.
+DO NOT USE FOR: live web content, API responses, real-time data."""
+}</pre>
+
+    <h3 id="d2-errors">Structured Error Responses</h3>
+    <table>
+      <tr><th>Category</th><th>Example</th><th>isRetryable</th><th>Agent action</th></tr>
+      <tr><td><code>transient</code></td><td>API timeout, service down</td><td>true</td><td>Retry with backoff</td></tr>
+      <tr><td><code>validation</code></td><td>Invalid order ID format</td><td>false</td><td>Reformulate the request</td></tr>
+      <tr><td><code>business</code></td><td>Refund exceeds policy limit</td><td>false</td><td>Communicate policy to customer</td></tr>
+      <tr><td><code>permission</code></td><td>Accessing admin record</td><td>false</td><td>Escalate to authorised agent</td></tr>
+    </table>
+
+<pre>def get_customer(customer_id: str) -> dict:
+    try:
+        result = api.fetch_customer(customer_id)
+        return {"isError": False, **result}
+
+    except TimeoutError:
+        return {
+            "isError": True,
+            "errorCategory": "transient",
+            "isRetryable": True,
+            "description": "Customer API timed out. Retry is appropriate.",
+            "attemptedQuery": f"GET /customers/{customer_id}"
+        }
+    except PolicyViolation as e:
+        return {
+            "isError": True,
+            "errorCategory": "business",
+            "isRetryable": False,
+            "description": str(e),
+            "customerMessage": "This account has a restriction. Contact our team.",
+            "retriable": False
+        }</pre>
+
+    <h3 id="d2-distribution">Tool Distribution Principle</h3>
+    <p>Giving an agent too many tools (18 instead of 4-5) degrades selection reliability by increasing decision complexity. Each agent gets only what it needs for its specific role.</p>
+
+    <table>
+      <tr><th>Agent</th><th>Correct tools</th><th>Why not more</th></tr>
+      <tr><td>Web Search</td><td>search_web, fetch_url</td><td>Synthesis agent attempting web searches = misrouting</td></tr>
+      <tr><td>Document Analysis</td><td>analyze_document, extract_data_points</td><td>Specialization prevents cross-role misuse</td></tr>
+      <tr><td>Synthesis</td><td>verify_fact (scoped)</td><td>Complex verification routes through coordinator</td></tr>
+      <tr><td>Coordinator</td><td>Task</td><td>Domain work delegated to specialists</td></tr>
+    </table>
+
+    <h3 id="d2-mcp">MCP Server Configuration</h3>
+<pre># .mcp.json — PROJECT level — version controlled — shared with team
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"  # env variable — never commit secrets
+      }
+    },
+    "jira": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-jira"],
+      "env": {"JIRA_TOKEN": "${JIRA_TOKEN}"}
+    }
+  }
+}
+
+# ~/.claude.json — USER level — NOT version controlled — personal only
+# Use for experimental or personal MCP servers</pre>
+
+    <div class="quiz-section" id="d2-quiz">
+      <h3>Domain 2 — Practice Questions (10)</h3>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q1. Two tools have nearly identical descriptions. What is the most likely observable symptom in production?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Both tools are called simultaneously for every request</li>
+          <li onclick="sel(this)">B) The model rotates between them unpredictably for semantically similar requests</li>
+          <li onclick="sel(this)">C) An error is thrown due to ambiguous tool selection</li>
+          <li onclick="sel(this)">D) The model refuses to use either tool and returns text instead</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Minimal or overlapping descriptions cause unreliable selection — the model lacks context to differentiate. The fix is enriching descriptions with clear purpose, input formats, example queries, and explicit "do not use for" boundaries.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q2. Your MCP tool returns an empty array [] for a customer with no orders. Should this use isError: true?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Yes — no orders found is an error condition</li>
+          <li onclick="sel(this)">B) No — empty result is a valid successful response; isError: true is for access failures</li>
+          <li onclick="sel(this)">C) Yes — the coordinator needs to know no data was returned</li>
+          <li onclick="sel(this)">D) It depends on whether the customer exists</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — An empty array is a successful query with no matches. isError: true signals access failures, timeouts, or policy violations — not valid empty results. Confusing the two prevents intelligent coordinator recovery.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q3. A developer wants to test a new experimental MCP server without affecting teammates. Where should they configure it?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) .mcp.json with an experimental: true flag</li>
+          <li onclick="sel(this)">B) ~/.claude.json — user-scoped, not version controlled</li>
+          <li onclick="sel(this)">C) A separate .mcp.experimental.json file</li>
+          <li onclick="sel(this)">D) .claude/config.json with a personal section</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — ~/.claude.json is user-scoped and never version controlled, making it the correct location for personal or experimental servers that should not affect teammates.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q4. Your synthesis agent keeps attempting web searches mid-synthesis instead of synthesizing. What is the root architectural cause?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) The synthesis agent's system prompt is ambiguous about its role</li>
+          <li onclick="sel(this)">B) The synthesis agent has access to web search tools outside its specialization</li>
+          <li onclick="sel(this)">C) The coordinator is not passing sufficient context to the synthesis agent</li>
+          <li onclick="sel(this)">D) The synthesis agent needs a stronger persona definition</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — When agents have tools outside their specialization, they misuse them. Remove web search tools from the synthesis agent. Provide only a scoped verify_fact tool for simple lookups. Complex verification routes through the coordinator.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q5. tool_choice: "any" vs tool_choice: "auto" — what is the key difference?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) "any" lets Claude pick any tool; "auto" forces a random tool</li>
+          <li onclick="sel(this)">B) "any" guarantees Claude calls a tool (not text); "auto" may return conversational text instead</li>
+          <li onclick="sel(this)">C) "any" uses all available tools; "auto" uses only the most relevant one</li>
+          <li onclick="sel(this)">D) They are equivalent — both allow Claude to decide</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — "auto" allows Claude to respond with text instead of calling a tool. "any" guarantees a tool call but Claude chooses which. For guaranteed structured output, use forced selection: {"type": "tool", "name": "specific_tool"}.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q6. A Jira MCP server exists in the community. When should you build a custom implementation instead?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Always — custom implementations give better control</li>
+          <li onclick="sel(this)">B) Only for team-specific workflows not covered by the community server</li>
+          <li onclick="sel(this)">C) When the team has more than 10 developers</li>
+          <li onclick="sel(this)">D) When the Jira instance is self-hosted</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Use existing community MCP servers for standard integrations. Reserve custom implementations for team-specific workflows not covered by community servers. This avoids unnecessary maintenance overhead.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q7. An MCP tool returns "Operation failed" for all error types. What specific problem does this cause?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Claude cannot display the error to the user</li>
+          <li onclick="sel(this)">B) The agent cannot distinguish transient failures (retry) from business violations (don't retry), leading to wasted retries or missed recovery opportunities</li>
+          <li onclick="sel(this)">C) The isError flag requires a specific message format</li>
+          <li onclick="sel(this)">D) Generic messages cause Claude to escalate all errors to humans</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Without errorCategory and isRetryable, the agent cannot make intelligent recovery decisions. Should it retry? Reformulate? Escalate? Inform the customer? Generic errors make all these decisions impossible.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q8. How do you prevent GitHub tokens from being committed to version control in .mcp.json?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Add .mcp.json to .gitignore</li>
+          <li onclick="sel(this)">B) Use ${GITHUB_TOKEN} environment variable expansion in .mcp.json</li>
+          <li onclick="sel(this)">C) Encrypt the token using a project-level key</li>
+          <li onclick="sel(this)">D) Store tokens in ~/.claude.json instead</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Environment variable expansion (${GITHUB_TOKEN}) lets you commit .mcp.json safely — the actual token value is read from the environment at runtime, never stored in the file.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q9. Your agent has 18 tools and tool selection accuracy is 60%. What is the first fix to try?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Add detailed instructions to system prompt about when to use each tool</li>
+          <li onclick="sel(this)">B) Add few-shot examples demonstrating correct tool selection</li>
+          <li onclick="sel(this)">C) Reduce each agent's tool set to only those needed for its specific role (4-5 tools)</li>
+          <li onclick="sel(this)">D) Switch to a larger model with better tool selection capability</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>C</strong> — Too many tools increases decision complexity and degrades selection reliability. Restricting to role-relevant tools (4-5) is the most impactful fix. Instructions and few-shot examples are secondary improvements after the tool count is right.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q10. MCP resources vs MCP tools — what is the key difference in purpose?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Resources are faster to call; tools are more reliable</li>
+          <li onclick="sel(this)">B) Resources expose content catalogs (data agents can browse); tools perform actions (functions agents call)</li>
+          <li onclick="sel(this)">C) Resources are read-only; tools can write to backend systems</li>
+          <li onclick="sel(this)">D) Resources are configured in .mcp.json; tools are defined in the API call</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — MCP resources expose content catalogs (issue summaries, documentation hierarchies, database schemas) to give agents visibility without exploratory tool calls. MCP tools are callable functions that perform actions.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DOMAIN 3 ══════════ -->
+<div class="section" id="domain3">
+  <div class="section-header d3-header">
+    <div class="domain-tag">Domain 3</div>
+    <h2>Claude Code Configuration &amp; Workflows</h2>
+    <div class="domain-weight">
+      <div class="weight-track"><div class="weight-fill" style="width:20%"></div></div>
+      <span class="weight-pct">20% of scored content</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <h3 id="d3-claudemd">CLAUDE.md Configuration Hierarchy</h3>
+    <table>
+      <tr><th>Location</th><th>Level</th><th>Version Controlled</th><th>Who sees it</th></tr>
+      <tr><td><code>~/.claude/CLAUDE.md</code></td><td>User</td><td>No</td><td>Only you</td></tr>
+      <tr><td><code>CLAUDE.md</code> / <code>.claude/CLAUDE.md</code></td><td>Project</td><td>Yes</td><td>Whole team</td></tr>
+      <tr><td><code>src/api/CLAUDE.md</code></td><td>Directory</td><td>Yes</td><td>Only when in that folder</td></tr>
+    </table>
+
+    <div class="trap">
+      <div class="trap-title">⚠ Most Tested Trap in Domain 3</div>
+      <p>"A new team member is not getting the coding standards everyone else receives."<br><br>
+      Root cause: Standards are in <code>~/.claude/CLAUDE.md</code> — user level, not version controlled, not shared.<br>
+      Fix: Move to project-level <code>CLAUDE.md</code> which is version controlled and automatically available to all developers who clone the repo.</p>
+    </div>
+
+<pre># Root CLAUDE.md — project level, version controlled, team-wide
+# ─────────────────────────────────────────────────────────────
+
+# Universal standards (apply everywhere)
+- All public functions must have docstrings
+- No hardcoded credentials — use environment variables only
+- All error handling must use structured responses
+
+# Import domain-specific rules using @import
+@import .claude/rules/testing.md
+@import .claude/rules/api-conventions.md
+@import .claude/rules/terraform.md</pre>
+
+    <h3 id="d3-rules">Path-Scoped Rules</h3>
+<pre># .claude/rules/testing.md
+# Loads ONLY when editing test files — regardless of directory location
+---
+paths: ["**/*.test.*", "**/*.spec.*", "**/tests/**/*"]
+---
+# Testing Conventions
+- Use pytest for Python, Jest for TypeScript/React
+- Mock ALL external dependencies — no real API calls in tests
+- Test name format: test_[what]_[when]_[expected_result]
+- Minimum coverage: happy path + 2 error cases per function
+
+# .claude/rules/api-conventions.md
+---
+paths: ["src/api/**/*", "src/handlers/**/*"]
+---
+# API Handler Conventions
+- All handlers use async/await
+- Error responses must use ErrorResponse schema
+- Rate limiting headers required on all responses
+- Log INFO for success, ERROR for failures with request ID</pre>
+
+    <h3 id="d3-skills">Skills and Slash Commands</h3>
+<pre># .claude/skills/analyze-codebase/SKILL.md
+---
+context: fork          # isolated sub-agent — verbose output STAYS in fork
+                       # only the summary returns to main conversation
+allowed-tools: Read, Grep, Glob    # read-only — cannot make changes
+argument-hint: "Specify scope: e.g. 'authentication flow' or 'all API endpoints'"
+---
+# Codebase Analysis
+
+Analyze the codebase for: $ARGUMENTS
+
+1. Use Glob to find relevant files matching the scope
+2. Use Grep to search for patterns, function names, imports
+3. Use Read to examine key files in detail
+4. Return a structured summary — do not make any changes
+
+# .claude/commands/review.md — /review command, shared with team
+Review the current changes against project standards.
+For each issue: file + line, description, why it violates standards, suggested fix.
+Focus: bugs, security, missing tests, violated conventions.
+Skip: formatting preferences, subjective style.</pre>
+
+    <h3 id="d3-planmode">Plan Mode vs Direct Execution</h3>
+    <table>
+      <tr><th>Scenario</th><th>Mode</th><th>Why</th></tr>
+      <tr><td>Fix a null pointer exception with a clear stack trace</td><td>Direct</td><td>Single file, clear scope, no architectural decision</td></tr>
+      <tr><td>Add date validation to one form field</td><td>Direct</td><td>Simple, well-scoped, reversible</td></tr>
+      <tr><td>Migrate from REST to GraphQL across 45 files</td><td>Plan</td><td>Multi-file, architectural decision, multiple valid approaches</td></tr>
+      <tr><td>Restructure monolith into microservices</td><td>Plan</td><td>Large scale, service boundary decisions, dependency mapping needed</td></tr>
+    </table>
+
+    <div class="quiz-section" id="d3-quiz">
+      <h3>Domain 3 — Practice Questions (10)</h3>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q1. Test files are scattered throughout the codebase alongside their source files. You want uniform testing conventions. Best approach?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Add testing conventions to root CLAUDE.md — loads everywhere</li>
+          <li onclick="sel(this)">B) Create .claude/rules/testing.md with paths: ["**/*.test.*"] — loads only for test files</li>
+          <li onclick="sel(this)">C) Create a CLAUDE.md in every directory that contains test files</li>
+          <li onclick="sel(this)">D) Create a skill that loads testing conventions on demand</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Path-scoped rules in .claude/rules/ with glob patterns apply conventions by file type regardless of directory location. Root CLAUDE.md always loads (wastes tokens when not editing tests). Directory CLAUDE.md files can't cover scattered files. Skills require manual invocation.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q2. A skill produces 3,000 tokens of verbose codebase analysis. You don't want this in your main conversation. Which frontmatter option isolates it?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) output: suppress</li>
+          <li onclick="sel(this)">B) context: fork</li>
+          <li onclick="sel(this)">C) allowed-tools: none</li>
+          <li onclick="sel(this)">D) mode: background</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — context: fork runs the skill in an isolated sub-agent context. Verbose output stays in the fork. Only the summary returns to the main conversation, keeping it clean.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q3. You want a /security-audit command available to every developer without manual setup. Where does the file go?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) ~/.claude/commands/security-audit.md</li>
+          <li onclick="sel(this)">B) .claude/commands/security-audit.md</li>
+          <li onclick="sel(this)">C) CLAUDE.md with a commands: section</li>
+          <li onclick="sel(this)">D) .claude/skills/security-audit/SKILL.md</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — .claude/commands/ is version controlled and automatically available to all developers when they clone or pull the repo. ~/.claude/commands/ is personal only. CLAUDE.md cannot contain command definitions.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q4. CI pipeline hangs on: claude "Review this PR for security issues". What is the fix?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Set CLAUDE_HEADLESS=true environment variable</li>
+          <li onclick="sel(this)">B) Add the -p (--print) flag for non-interactive mode</li>
+          <li onclick="sel(this)">C) Redirect stdin from /dev/null</li>
+          <li onclick="sel(this)">D) Add the --batch flag</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — The -p (--print) flag runs Claude Code non-interactively. It processes the prompt, writes to stdout, and exits. Options A, C, D reference non-existent Claude Code features.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q5. You run /memory in Claude Code. What does this command do?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Clears all conversation history to free context space</li>
+          <li onclick="sel(this)">B) Shows which CLAUDE.md files are currently loaded in this session</li>
+          <li onclick="sel(this)">C) Saves the current session to a named memory slot</li>
+          <li onclick="sel(this)">D) Exports conversation history to a file</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — /memory shows which memory files (CLAUDE.md files) are currently loaded. Use it to diagnose why conventions aren't being applied — if a file isn't in the list, it's not being loaded.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q6. When should you use --output-format json with --json-schema in CI?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) When the review findings need to be posted as inline PR comments programmatically</li>
+          <li onclick="sel(this)">B) When the model needs to think longer about complex code</li>
+          <li onclick="sel(this)">C) When the codebase is too large for a single review pass</li>
+          <li onclick="sel(this)">D) When multiple developers are reviewing simultaneously</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>A</strong> — --output-format json with --json-schema produces machine-parseable structured findings that your CI script can programmatically post as inline PR comments, create tickets, or route to other systems.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q7. CLAUDE.md vs .claude/skills/ — when do you choose a skill over adding to CLAUDE.md?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) When the convention is too complex for CLAUDE.md</li>
+          <li onclick="sel(this)">B) When you need on-demand invocation for task-specific workflows rather than always-loaded universal standards</li>
+          <li onclick="sel(this)">C) When the CLAUDE.md file exceeds 1,000 lines</li>
+          <li onclick="sel(this)">D) When the skill needs to run faster than CLAUDE.md loading allows</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — CLAUDE.md is always loaded — use it for universal standards that apply to every session. Skills are on-demand — use them for specific workflows (codebase analysis, security audit) that you invoke intentionally, not every session.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q8. A developer wants a personal variant of the team's code-review skill with stricter criteria, without affecting teammates. Where should they put it?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Override .claude/skills/review/SKILL.md with their version</li>
+          <li onclick="sel(this)">B) Create a personal variant in ~/.claude/skills/ with a different name</li>
+          <li onclick="sel(this)">C) Add their criteria to the project CLAUDE.md with their name as a comment</li>
+          <li onclick="sel(this)">D) Fork the repository and modify the skill there</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — ~/.claude/skills/ is user-scoped and not version controlled. Creating a personal variant there with a different name (e.g., strict-review) avoids affecting the team's shared skill.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q9. The @import syntax in CLAUDE.md is used for what purpose?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Importing code files for Claude to analyze</li>
+          <li onclick="sel(this)">B) Referencing external files to keep CLAUDE.md modular and maintainable</li>
+          <li onclick="sel(this)">C) Loading MCP server configurations</li>
+          <li onclick="sel(this)">D) Importing slash commands from another directory</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — @import lets you split a large CLAUDE.md into focused, maintainable topic-specific files. The root CLAUDE.md stays clean while importing domain-specific standards (testing, API conventions, deployment rules) from separate files.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q10. You're migrating a library across 45 files. Two implementation approaches exist with different performance tradeoffs. Which mode?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Direct execution with comprehensive upfront instructions</li>
+          <li onclick="sel(this)">B) Plan mode to explore the codebase, evaluate both approaches, then propose an implementation plan before making changes</li>
+          <li onclick="sel(this)">C) Direct execution on the first 5 files, then plan mode for the rest</li>
+          <li onclick="sel(this)">D) Start direct execution and switch to plan mode if complexity increases</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Plan mode is designed for large-scale changes with architectural decisions and multiple valid approaches. It enables safe exploration before committing, preventing costly rework when dependencies are discovered late.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DOMAIN 4 ══════════ -->
+<div class="section" id="domain4">
+  <div class="section-header d4-header">
+    <div class="domain-tag">Domain 4</div>
+    <h2>Prompt Engineering &amp; Structured Output</h2>
+    <div class="domain-weight">
+      <div class="weight-track"><div class="weight-fill" style="width:20%"></div></div>
+      <span class="weight-pct">20% of scored content</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <h3 id="d4-tooluse">tool_use and JSON Schema</h3>
+    <table>
+      <tr><th>tool_choice</th><th>Behaviour</th><th>Use when</th></tr>
+      <tr><td><code>"auto"</code></td><td>Claude may return text OR call a tool</td><td>Tool is optional</td></tr>
+      <tr><td><code>"any"</code></td><td>Must call a tool — Claude picks which</td><td>Any tool will do</td></tr>
+      <tr><td><code>{"type":"tool","name":"..."}</code></td><td>Must call THIS specific tool</td><td>Guaranteed structured output</td></tr>
+    </table>
+
+    <div class="exercise">
+      <div class="exercise-header">Invoice Extraction — Full Working Example (Built in Day 2)</div>
+      <div class="exercise-body">
+<pre>import anthropic, json
+
+client = anthropic.Anthropic()
+
+extraction_tool = {
+    "name": "extract_invoice_data",
+    "description": "Extract structured invoice data from document text",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "invoice_number": {"type": "string"},
+            "vendor_name":    {"type": "string"},
+            "total_amount":   {"type": "number"},
+            "currency": {
+                "type": "string",
+                "enum": ["INR", "USD", "GBP", "EUR", "other"]
+            },
+            "payment_terms": {
+                # nullable — returns null if not present in document
+                # WITHOUT nullable, Claude fabricates a value
+                "type": ["string", "null"],
+                "description": "Null if not mentioned"
+            },
+            "calculated_total": {
+                "type": "number",
+                "description": "Sum of line items — used to catch semantic errors"
+            }
+        },
+        "required": ["invoice_number", "vendor_name",
+                     "total_amount", "currency", "calculated_total"]
+    }
+}
+
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1000,
+    tools=[extraction_tool],
+    tool_choice={"type": "tool", "name": "extract_invoice_data"},  # forced
+    messages=[{"role": "user", "content": f"Extract: {document}"}]
+)
+
+# Read from tool_use block — NOT response.content[0].text
+for block in response.content:
+    if block.type == "tool_use":
+        extracted = block.input  # your guaranteed JSON object
+
+        # SEMANTIC VALIDATION — schema cannot catch this
+        diff = abs(extracted["total_amount"] - extracted["calculated_total"])
+        if diff > 1:
+            print(f"Maths error: stated={extracted['total_amount']}, "
+                  f"calculated={extracted['calculated_total']}")</pre>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="trap-title">⚠ Critical Distinction — Syntax vs Semantic Errors</div>
+      <p><strong>tool_use + JSON schema eliminates:</strong> malformed JSON, wrong field types, missing required fields<br><br>
+      <strong>Does NOT prevent:</strong> line items not summing to total, values in wrong fields, amounts misread from "forty five thousand"<br><br>
+      Semantic validation is YOUR responsibility in code.</p>
+    </div>
+
+    <h3 id="d4-fewshot">Few-Shot Prompting</h3>
+    <p>The most effective technique when instructions alone produce inconsistent results. 2-4 targeted examples outperform 10 generic ones.</p>
+
+<pre># System prompt with few-shot examples for code review
+system = """
+You review code for security issues. Here are examples of correct judgments:
+
+EXAMPLE 1 — Report this:
+Code: user_input = request.get('id'); query = f"SELECT * FROM users WHERE id={user_input}"
+Finding: SQL injection — user input concatenated directly into query.
+Severity: critical
+
+EXAMPLE 2 — Skip this (acceptable pattern):
+Code: logger.info(f"Processing request for user {user_id}")
+Finding: None — logging user IDs is acceptable for audit trails in this codebase.
+
+EXAMPLE 3 — Ambiguous case handling:
+Code: password = os.environ.get('PASSWORD', 'default123')
+Finding: Hardcoded fallback password in environment variable default.
+Severity: high — the fallback defeats the purpose of using an env var.
+"""</pre>
+
+    <h3 id="d4-validation">Validation and Retry Loops</h3>
+<pre>def retry_with_error_feedback(document, failed_extraction, specific_error):
+    """
+    Retry works when: format mismatch, structural errors, misread values
+    Retry does NOT work when: required information is absent from the document
+    """
+    return client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=1000,
+        tools=[extraction_tool],
+        tool_choice={"type": "tool", "name": "extract_invoice_data"},
+        messages=[
+            {"role": "user",
+             "content": f"Extract invoice data:\n{document}"},
+            {"role": "assistant",
+             "content": [{"type": "tool_use", "id": "toolu_01",
+                          "name": "extract_invoice_data",
+                          "input": failed_extraction}]},
+            {"role": "user",
+             "content": [{
+                 "type": "tool_result",
+                 "tool_use_id": "toolu_01",
+                 # Specific error — not generic "try again"
+                 "content": f"Validation error: {specific_error}. Re-extract and correct."
+             }]}
+        ]
+    )</pre>
+
+    <h3 id="d4-batch">Batch Processing API</h3>
+    <table>
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>Cost saving</td><td>50% vs synchronous</td></tr>
+      <tr><td>Max processing time</td><td>24 hours</td></tr>
+      <tr><td>Latency SLA</td><td>None</td></tr>
+      <tr><td>Multi-turn tool calling</td><td>Not supported in single request</td></tr>
+      <tr><td>Result correlation</td><td>custom_id field</td></tr>
+    </table>
+
+    <div class="quiz-section" id="d4-quiz">
+      <h3>Domain 4 — Practice Questions (10)</h3>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q1. You set tool_choice: "auto" for your extraction tool. On some requests, Claude returns a text explanation instead of calling the tool. What is happening?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) The tool description is too long</li>
+          <li onclick="sel(this)">B) "auto" allows Claude to decide — it may return text; use "any" or forced selection to guarantee a tool call</li>
+          <li onclick="sel(this)">C) The document exceeded the context window</li>
+          <li onclick="sel(this)">D) The JSON schema has an error</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — tool_choice: "auto" is not a guarantee. Claude may decide a text response is more appropriate. For guaranteed structured output, use tool_choice: "any" (must call a tool) or {"type": "tool", "name": "..."} (must call this specific tool).</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q2. Your schema has vendor_address as required. 30% of invoices don't include an address. What will happen?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Extraction fails with a schema validation error</li>
+          <li onclick="sel(this)">B) Claude returns null for the field</li>
+          <li onclick="sel(this)">C) Claude fabricates an address to satisfy the required constraint</li>
+          <li onclick="sel(this)">D) Claude asks the user to provide the missing address</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>C</strong> — Required fields that have no corresponding information in the source document cause Claude to fabricate values. Make such fields nullable (type: ["string", "null"]) so Claude returns null instead of invented data.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q3. After adding few-shot examples, false positives drop from 40% to 15%, but unused-import warnings still have 80% false positive rate. What is correct next step?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Add more general examples to cover all patterns</li>
+          <li onclick="sel(this)">B) Temporarily disable unused-import checking while adding specific examples for that pattern to restore developer trust</li>
+          <li onclick="sel(this)">C) Switch to a larger model</li>
+          <li onclick="sel(this)">D) Add a confidence threshold filter</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — High false positive rates in specific categories undermine developer trust in the whole system. Temporarily disable the problematic category while improving it with targeted examples. This is more effective than leaving it active with 80% false positive rate.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q4. You submit 500 documents in a batch. 13 fail. How do you resubmit?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Resubmit all 500 with a modified prompt</li>
+          <li onclick="sel(this)">B) Identify the 13 failed documents by their custom_id and resubmit only those with appropriate modifications</li>
+          <li onclick="sel(this)">C) Increase max_tokens and resubmit all 500</li>
+          <li onclick="sel(this)">D) Mark the 13 as exceptions and proceed without them</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — custom_id identifies each request-response pair. Resubmit only failed documents with appropriate modifications (e.g., chunking oversized documents). Resubmitting all 500 wastes cost and time.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q5. Your invoice extraction keeps returning null for claim_date even when clearly stated. You've retried twice with no improvement. What should you do differently?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Make claim_date a required field to force extraction</li>
+          <li onclick="sel(this)">B) Include the original document, the failed extraction, and the specific error ("claim_date stated as March 15 2024 but returned as null") in the retry prompt</li>
+          <li onclick="sel(this)">C) Use a different model for date extraction</li>
+          <li onclick="sel(this)">D) Split the document into smaller chunks</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Generic retries without error feedback rarely succeed. The retry must include the original document, the failed extraction, AND the specific validation error. This gives Claude the context to identify and fix the specific extraction failure.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q6. What does tool_use with JSON schema guarantee vs NOT guarantee?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Guarantees correct values; does not guarantee field names</li>
+          <li onclick="sel(this)">B) Guarantees syntax (valid JSON, correct types, required fields present); does not prevent semantic errors (wrong totals, misplaced values)</li>
+          <li onclick="sel(this)">C) Guarantees both syntax and semantics</li>
+          <li onclick="sel(this)">D) Guarantees no hallucination; does not prevent format errors</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — JSON schema enforces structure (syntax). It cannot detect that line items don't sum to the stated total, or that an amount was placed in the wrong field — those are semantic errors requiring your validation code.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q7. When is the Batch API NOT appropriate to use?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) When processing more than 100 documents</li>
+          <li onclick="sel(this)">B) For blocking workflows where users or developers wait for results</li>
+          <li onclick="sel(this)">C) When documents vary in length</li>
+          <li onclick="sel(this)">D) When extraction requires tool calling</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — The Batch API has no latency SLA and can take up to 24 hours. Never use it for blocking workflows (pre-merge checks, real-time user responses). Use it for latency-tolerant workloads: overnight reports, weekly audits, nightly test generation.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q8. When should you use few-shot examples instead of detailed instructions?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Always — examples are always more effective than instructions</li>
+          <li onclick="sel(this)">B) When detailed instructions alone produce inconsistent results and you need to demonstrate judgment for ambiguous cases</li>
+          <li onclick="sel(this)">C) When the task involves code rather than natural language</li>
+          <li onclick="sel(this)">D) Only when the model is unfamiliar with the domain</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Few-shot examples are most effective when instructions produce inconsistent output, when you need to demonstrate ambiguous-case handling, or when you want the model to generalize judgment to novel patterns beyond pre-specified cases.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q9. Which field design prevents Claude from fabricating values for optional information?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Setting a default value in the schema</li>
+          <li onclick="sel(this)">B) Making the field nullable: type: ["string", "null"]</li>
+          <li onclick="sel(this)">C) Adding a note in the description: "return empty string if absent"</li>
+          <li onclick="sel(this)">D) Removing the field from the schema entirely</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Nullable fields (type: ["string", "null"]) explicitly allow Claude to return null when the information isn't present. Required non-nullable fields cause fabrication. Empty string in description is just a prompt instruction — not schema enforcement.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q10. The Batch API does not support which capability within a single request?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Processing multiple documents</li>
+          <li onclick="sel(this)">B) Multi-turn tool calling — executing tools mid-request and returning results</li>
+          <li onclick="sel(this)">C) Using JSON schema for structured output</li>
+          <li onclick="sel(this)">D) Processing documents larger than 100KB</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — The Batch API does not support multi-turn tool calling within a single request. You cannot execute tools and return results mid-request. Use the synchronous API for agentic workflows requiring tool use.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DOMAIN 5 ══════════ -->
+<div class="section" id="domain5">
+  <div class="section-header d5-header">
+    <div class="domain-tag">Domain 5</div>
+    <h2>Context Management &amp; Reliability</h2>
+    <div class="domain-weight">
+      <div class="weight-track"><div class="weight-fill" style="width:15%"></div></div>
+      <span class="weight-pct">15% of scored content</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <h3 id="d5-lostmiddle">The Lost-in-the-Middle Effect</h3>
+    <p>Claude has no persistent memory between API calls. Every call receives the full conversation history. Attention is highest at the beginning and end — information buried in the middle gets lower fidelity recall.</p>
+
+    <div class="exercise">
+      <div class="exercise-header">Day 1 Exercise Results — Actual Terminal Output</div>
+      <div class="exercise-body">
+<pre># What we proved in Exercise 1.1:
+# Customer stated ₹4,750 and two email addresses in Turn 1
+# 16 more turns of conversation + verbose tool results followed
+# At Turn 17, asked Claude to recall the facts
+
+# Result: Inconsistent recall across multiple runs
+# Sometimes exact. Sometimes slightly wrong.
+# In production = financial errors.
+
+# What Exercise 1.2 proved:
+# Same conversation. Same 17 turns.
+# ONE change: case facts block in system prompt.
+# Result: Consistent exact recall every run.
+
+# Exercise 1.3 measured the cost:
+Full API response  : 45 fields, 1,758 characters
+Trimmed response   : 5 fields,  144 characters
+Reduction          : 92%
+
+One conversation, 5 tool calls:
+Full load   → 8,790 characters of noise
+Trimmed     → 720 characters of signal</pre>
+      </div>
+    </div>
+
+    <h3 id="d5-casefacts">The Case Facts Block Solution</h3>
+<pre>case_facts = """
+&lt;case_facts&gt;
+These facts were extracted from the customer's opening message.
+Always use these exact values — do not rely on conversation history.
+
+ORDER_ID:        ORD-8821
+REFUND_AMOUNT:   Rs.4750
+REFUND_REASON:   damaged delivery
+EMAIL_ORIGINAL:  sharma.old@gmail.com
+EMAIL_CORRECTED: sharvan.kumar@infosys.com
+CUSTOMER_ID:     CUST-441
+&lt;/case_facts&gt;
+"""
+
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    system=case_facts,    # ← position 1. always. never buried.
+    messages=messages
+)
+# The system prompt sits above the entire conversation history
+# Claude reads it first on every single API call
+# No matter how long the conversation grows — facts stay accessible</pre>
+
+    <h3 id="d5-trimming">Verbose Tool Output Trimming</h3>
+<pre>def trim_for_damage_return(full_api_response: dict) -> dict:
+    """
+    Order API returns 45 fields. Damage return workflow needs 5.
+    Trim BEFORE appending to conversation history.
+    Never add raw API responses directly to context.
+    """
+    return {
+        "order_id":             full_api_response["order_id"],
+        "status":               full_api_response["status_label"],
+        "total_amount":         full_api_response["total_amount"],
+        "return_eligible":      full_api_response["return_eligible"],
+        "return_window_closes": full_api_response["return_window_closes"]
+    }
+    # 45 fields → 5 fields  |  1,758 chars → 144 chars  |  92% reduction
+
+# In your agentic loop:
+tool_result = call_order_api(order_id)          # raw API response
+trimmed = trim_for_damage_return(tool_result)   # trim HERE
+messages.append({"role": "user", "content": [{ # add trimmed version
+    "type": "tool_result",
+    "tool_use_id": block.id,
+    "content": json.dumps(trimmed)              # not json.dumps(tool_result)
+}]})</pre>
+
+    <h3 id="d5-errors">Error Propagation Anti-Patterns</h3>
+    <table>
+      <tr><th>Anti-Pattern</th><th>What goes wrong</th></tr>
+      <tr><td>Return [] as success on timeout</td><td>Coordinator cannot distinguish failure from valid empty result — produces incomplete output silently</td></tr>
+      <tr><td>Generic "search unavailable" message</td><td>Coordinator cannot decide: retry? alternative source? proceed with partial? All options look the same</td></tr>
+      <tr><td>Terminate entire workflow on single failure</td><td>Discards all successful subagent work — wasteful and unnecessary</td></tr>
+    </table>
+
+    <div class="quiz-section" id="d5-quiz">
+      <h3>Domain 5 — Practice Questions (10)</h3>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q1. Agent misremembers refund amounts after 15+ turn conversations. Most effective architectural fix?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Switch to a model with a larger context window</li>
+          <li onclick="sel(this)">B) Extract critical transactional facts into a persistent block in the system prompt, outside summarized history</li>
+          <li onclick="sel(this)">C) Summarize the conversation every 5 turns</li>
+          <li onclick="sel(this)">D) Repeat facts at the end of every user message</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — System prompt is always position 1 where attention is highest. It never gets buried regardless of conversation length. Larger context windows don't improve attention quality. Summarization is lossy and can lose precise numerical values.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q2. Your web search subagent times out. It returns {"results": []} with isError: false. What is the problem?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Empty arrays should use null instead</li>
+          <li onclick="sel(this)">B) The coordinator cannot distinguish a timeout failure from a valid search that returned no results — silent failure anti-pattern</li>
+          <li onclick="sel(this)">C) The subagent should have retried before returning</li>
+          <li onclick="sel(this)">D) isError should always be included regardless of value</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Returning empty results as success when a timeout occurred is the silent suppression anti-pattern. The coordinator has no way to know whether the search failed or genuinely returned no results, preventing any recovery decision.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q3. Your extraction pipeline shows 97% overall accuracy. Your manager proposes removing human review. What must you verify first?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) That the sample size was statistically significant</li>
+          <li onclick="sel(this)">B) That accuracy is consistent across all document types and fields — aggregate metrics mask failures in specific segments</li>
+          <li onclick="sel(this)">C) That the remaining 3% errors are evenly distributed</li>
+          <li onclick="sel(this)">D) That the latest model version was used for measurement</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — 97% overall can mask 60% failure rates on specific document types or fields. Segment accuracy by document type and field before reducing human review. Aggregate metrics are insufficient for production go/no-go decisions.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q4. After 30 turns of codebase exploration, Claude starts referencing "typical patterns" instead of specific classes it found earlier. What has happened?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Claude has reached its knowledge cutoff for this codebase</li>
+          <li onclick="sel(this)">B) Context degradation — earlier findings are in the low-attention middle zone; use scratchpad files to persist key findings</li>
+          <li onclick="sel(this)">C) The model is hallucinating — add "do not make up information" to the prompt</li>
+          <li onclick="sel(this)">D) The session is corrupted — use --resume to reload</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Context degradation in extended sessions causes models to fall back on generic descriptions rather than specific earlier discoveries. Fix: maintain scratchpad files recording key findings, use /compact to reduce context, or spawn subagents with injected summaries.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q5. Which of these is correct for the three-zone prompt architecture?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Zone 1 (current turn) → Zone 2 (history) → Zone 3 (facts) from top to bottom</li>
+          <li onclick="sel(this)">B) Zone 1 (facts — system prompt) → Zone 2 (compressed history) → Zone 3 (current turn) from top to bottom</li>
+          <li onclick="sel(this)">C) All three zones are interleaved throughout the conversation</li>
+          <li onclick="sel(this)">D) Zone ordering depends on the type of request</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Facts block goes first (system prompt = position 1 = highest attention). Compressed history in the middle. Current turn last (also high attention). This architecture exploits the U-shaped attention curve.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q6. A customer asks "I want to speak to a human agent right now." What should the agent do?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Acknowledge the request, then attempt to resolve the issue since it's straightforward</li>
+          <li onclick="sel(this)">B) Escalate immediately without attempting investigation</li>
+          <li onclick="sel(this)">C) Ask why they want a human before deciding</li>
+          <li onclick="sel(this)">D) Offer resolution first, escalate only after three failed attempts</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — When a customer explicitly requests a human agent, escalate immediately without attempting investigation first. This is a non-negotiable escalation trigger. Attempting to resolve despite an explicit request violates customer trust.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q7. Your order lookup tool returns 45 fields. Your damage return workflow needs 5. When should you trim the output?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) After the conversation ends, as post-processing cleanup</li>
+          <li onclick="sel(this)">B) Before appending the tool result to conversation history</li>
+          <li onclick="sel(this)">C) When the conversation exceeds 10 turns</li>
+          <li onclick="sel(this)">D) Ask Claude to ignore irrelevant fields via system prompt</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Trim before appending to conversation history. Once verbose output is in history, it's already consuming context budget and pushing earlier facts further into the middle. The trim must happen before the data enters the context.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q8. Two credible sources report conflicting statistics. How should the synthesis agent handle this?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Use the more recent source and discard the other</li>
+          <li onclick="sel(this)">B) Average the two values</li>
+          <li onclick="sel(this)">C) Include both values with source attribution and annotate the conflict explicitly</li>
+          <li onclick="sel(this)">D) Escalate to the coordinator to decide which to use</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>C</strong> — Conflicting statistics from credible sources should be preserved with attribution and explicit conflict annotation. Arbitrarily selecting one, averaging, or hiding the conflict all misrepresent the state of knowledge.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q9. Progressive summarization of conversation history risks losing what specific types of information?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Conversational tone and politeness markers</li>
+          <li onclick="sel(this)">B) Precise numerical values, percentages, dates, and customer-stated expectations</li>
+          <li onclick="sel(this)">C) Tool call sequences and execution order</li>
+          <li onclick="sel(this)">D) System prompt instructions</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Summarization compresses "customer expects refund of ₹4,750 by end of month" into "customer wants refund" — losing the precise amount and deadline. Extract numerical facts, dates, and specific commitments into the case facts block before summarizing.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">Q10. Sentiment-based escalation (escalate when frustration score exceeds threshold) has which specific problem?</div>
+        <ul class="quiz-options">
+          <li onclick="sel(this)">A) Sentiment analysis APIs are too slow for real-time use</li>
+          <li onclick="sel(this)">B) Sentiment does not correlate with case complexity — a customer can be frustrated about a simple issue or calm about a policy exception</li>
+          <li onclick="sel(this)">C) Customers behave differently when they know sentiment is being tracked</li>
+          <li onclick="sel(this)">D) Sentiment analysis is too expensive to run on every message</li>
+        </ul>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="quiz-answer"><strong>B</strong> — Sentiment is a proxy for customer experience, not case complexity. Escalation should be triggered by: explicit customer request, policy gaps/exceptions, or inability to make meaningful progress — not emotional tone.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCENARIOS ══════════ -->
+<div class="section" id="scenarios">
+  <div class="section-header scenario-header">
+    <div class="domain-tag">Exam Format</div>
+    <h2>All 6 Exam Scenarios — Walkthroughs</h2>
+    <div class="domain-weight">
+      <div class="weight-track"><div class="weight-fill" style="width:100%"></div></div>
+      <span class="weight-pct">4 of these 6 appear on exam (random)</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="info-box"><p>The exam presents 4 scenarios selected randomly from these 6. Each scenario frames a set of questions. Understanding the architecture of each scenario deeply is more valuable than memorizing specific answers.</p></div>
+
+    <div class="scenario-card" id="sc1">
+      <div class="scenario-tag">Scenario 1 · Domains 1, 2, 5</div>
+      <h4>Customer Support Resolution Agent</h4>
+      <p>Building a customer support agent using Claude Agent SDK. Tools: get_customer, lookup_order, process_refund, escalate_to_human. Target: 80%+ first-contact resolution.</p>
+      <p><strong>Key architectural decisions tested:</strong></p>
+      <ul>
+        <li>Programmatic prerequisites blocking process_refund until get_customer succeeds</li>
+        <li>PostToolUse hooks normalizing heterogeneous tool output formats</li>
+        <li>Structured escalation summaries for human agents who lack conversation access</li>
+        <li>Multi-concern request decomposition and parallel investigation</li>
+        <li>Explicit escalation triggers vs sentiment-based escalation</li>
+      </ul>
+      <div class="scenario-q">
+        <div class="q-text">The agent achieves 55% first-contact resolution. Logs show it escalates standard damage replacements while attempting to autonomously handle policy exceptions. Most effective fix?</div>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="scenario-a"><strong>Add explicit escalation criteria with few-shot examples</strong> to the system prompt demonstrating when to escalate vs resolve autonomously. Self-reported confidence scores (Option B) are poorly calibrated. A separate classifier (Option C) is over-engineered before prompt optimization is tried. Sentiment analysis (Option D) doesn't correlate with case complexity.</div>
+      </div>
+    </div>
+
+    <div class="scenario-card" id="sc2">
+      <div class="scenario-tag">Scenario 2 · Domains 3, 5</div>
+      <h4>Code Generation with Claude Code</h4>
+      <p>Using Claude Code for code generation, refactoring, debugging, and documentation. Integrating into team workflow with custom slash commands, CLAUDE.md configurations, and plan mode.</p>
+      <p><strong>Key architectural decisions tested:</strong></p>
+      <ul>
+        <li>Project vs user-level CLAUDE.md configuration and version control sharing</li>
+        <li>Path-scoped rules for conventions that apply across directories</li>
+        <li>Plan mode selection for complex multi-file architectural tasks</li>
+        <li>context: fork for verbose skill output isolation</li>
+        <li>CI/CD non-interactive mode with -p flag</li>
+      </ul>
+      <div class="scenario-q">
+        <div class="q-text">You want a /review command available to every developer automatically when they clone the repo. Where does it go?</div>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="scenario-a"><strong>.claude/commands/review.md</strong> — project-scoped commands in .claude/commands/ are version controlled and automatically available to all developers. ~/.claude/commands/ is personal only. CLAUDE.md cannot contain command definitions.</div>
+      </div>
+    </div>
+
+    <div class="scenario-card" id="sc3">
+      <div class="scenario-tag">Scenario 3 · Domains 1, 2, 5</div>
+      <h4>Multi-Agent Research System</h4>
+      <p>Coordinator delegates to specialized subagents: web search, document analysis, synthesis, report generation. Produces comprehensive cited research reports.</p>
+      <p><strong>Key architectural decisions tested:</strong></p>
+      <ul>
+        <li>Coordinator task decomposition breadth and coverage</li>
+        <li>Explicit context injection from coordinator to synthesis subagent</li>
+        <li>Structured claim-source mappings preserved through synthesis</li>
+        <li>Parallel subagent execution via multiple Task calls in one response</li>
+        <li>Error propagation with partial results and coverage gap annotations</li>
+      </ul>
+      <div class="scenario-q">
+        <div class="q-text">The synthesis agent's report has no source citations. The search and analysis agents included source URLs in their outputs. What happened?</div>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="scenario-a"><strong>Source attribution was lost during context passing.</strong> The coordinator summarized findings without preserving claim-source mappings. Fix: require subagents to output structured {claim, source_url, evidence_excerpt} objects, and require the synthesis agent to preserve these mappings when combining findings.</div>
+      </div>
+    </div>
+
+    <div class="scenario-card" id="sc4">
+      <div class="scenario-tag">Scenario 4 · Domains 2, 3, 1</div>
+      <h4>Developer Productivity with Claude</h4>
+      <p>Agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate. Uses built-in tools (Read, Write, Bash, Grep, Glob) and MCP servers.</p>
+      <p><strong>Key architectural decisions tested:</strong></p>
+      <ul>
+        <li>Grep vs Glob selection criteria (content search vs file path matching)</li>
+        <li>Incremental codebase exploration strategy</li>
+        <li>MCP resource usage for content catalog discovery</li>
+        <li>context: fork for isolating verbose discovery output</li>
+        <li>Scratchpad files for persisting key findings across context boundaries</li>
+      </ul>
+      <div class="scenario-q">
+        <div class="q-text">You want to find all files with a .test.tsx extension across the project. Which built-in tool do you use?</div>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="scenario-a"><strong>Glob</strong> — Glob is for file path pattern matching (finding files by name or extension patterns). Pattern: **/*.test.tsx. Grep is for content search (searching inside file contents). Use Grep when you know what text to look for; use Glob when you know the file naming pattern.</div>
+      </div>
+    </div>
+
+    <div class="scenario-card" id="sc5">
+      <div class="scenario-tag">Scenario 5 · Domains 3, 4</div>
+      <h4>Claude Code for Continuous Integration</h4>
+      <p>Integrating Claude Code into CI/CD pipelines. Automated code reviews, test case generation, pull request feedback. Machine-parseable structured output.</p>
+      <p><strong>Key architectural decisions tested:</strong></p>
+      <ul>
+        <li>-p flag for non-interactive CI mode</li>
+        <li>--output-format json + --json-schema for programmatic output</li>
+        <li>Session context isolation for independent review instances</li>
+        <li>Including prior review findings to avoid duplicate comments</li>
+        <li>CLAUDE.md for CI-relevant context (testing standards, fixtures)</li>
+      </ul>
+      <div class="scenario-q">
+        <div class="q-text">Your CI review keeps flagging the same issues on subsequent commits even after they're addressed. What is the architectural fix?</div>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="scenario-a"><strong>Include prior review findings in context</strong> for subsequent reviews, and instruct Claude to report only new or still-unaddressed issues. Without prior context, each review run is independent — it has no knowledge of what was already flagged and resolved.</div>
+      </div>
+    </div>
+
+    <div class="scenario-card" id="sc6">
+      <div class="scenario-tag">Scenario 6 · Domains 4, 5</div>
+      <h4>Structured Data Extraction</h4>
+      <p>Extracting information from unstructured documents, validating with JSON schemas, maintaining high accuracy, integrating with downstream systems.</p>
+      <p><strong>Key architectural decisions tested:</strong></p>
+      <ul>
+        <li>tool_use with JSON schema for guaranteed structure</li>
+        <li>Nullable fields preventing fabrication of absent information</li>
+        <li>Semantic validation (calculated_total vs stated_total)</li>
+        <li>Retry-with-error-feedback for format and structural errors</li>
+        <li>Accuracy segmentation by document type before removing human review</li>
+      </ul>
+      <div class="scenario-q">
+        <div class="q-text">You use tool_use with a strict JSON schema. The downstream system still reports data errors. What is the most likely cause?</div>
+        <button class="reveal-btn" onclick="rev(this)">Reveal Answer</button>
+        <div class="scenario-a"><strong>Semantic errors not caught by schema.</strong> JSON schema eliminates syntax errors (malformed JSON, wrong types, missing fields) but cannot detect semantic errors: line items not summing to stated total, values placed in wrong fields, amounts misread. Semantic validation must be implemented in your code.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ CHEAT SHEET ══════════ -->
+<div class="section" id="cheatsheet">
+  <div class="section-header cheat-header">
+    <div class="domain-tag">Quick Reference</div>
+    <h2>Cheat Sheet — Everything You Must Know</h2>
+  </div>
+  <div class="section-body" style="background:#0f172a;border-color:#1e293b;">
+    <div class="cheat-grid">
+
+      <div class="cheat-card">
+        <h4>stop_reason Values</h4>
+        <div class="item"><span class="key">tool_use</span><span class="val">Claude wants to call a tool → execute and loop</span></div>
+        <div class="item"><span class="key">end_turn</span><span class="val">Claude is done → read response and exit</span></div>
+      </div>
+
+      <div class="cheat-card">
+        <h4>tool_choice Options</h4>
+        <div class="item"><span class="key">"auto"</span><span class="val">May return text — not guaranteed tool call</span></div>
+        <div class="item"><span class="key">"any"</span><span class="val">Must call a tool — Claude picks which</span></div>
+        <div class="item"><span class="key">{type,name}</span><span class="val">Must call THIS specific tool</span></div>
+      </div>
+
+      <div class="cheat-card">
+        <h4>CLAUDE.md Hierarchy</h4>
+        <div class="item"><span class="key">~/.claude/</span><span class="val">User — not version controlled — you only</span></div>
+        <div class="item"><span class="key">root/</span><span class="val">Project — version controlled — whole team</span></div>
+        <div class="item"><span class="key">subdir/</span><span class="val">Directory — loads only in that folder</span></div>
+      </div>
+
+      <div class="cheat-card">
+        <h4>MCP Config Scoping</h4>
+        <div class="item"><span class="key">.mcp.json</span><span class="val">Project — version controlled — shared team</span></div>
+        <div class="item"><span class="key">~/.claude.json</span><span class="val">User — not controlled — personal only</span></div>
+        <div class="item"><span class="key">${TOKEN}</span><span class="val">Env variable expansion — never commit secrets</span></div>
+      </div>
+
+      <div class="cheat-card">
+        <h4>Error Categories</h4>
+        <div class="item"><span class="key">transient</span><span class="val">Timeout — isRetryable: true</span></div>
+        <div class="item"><span class="key">validation</span><span class="val">Bad input — isRetryable: false</span></div>
+        <div class="item"><span class="key">business</span><span class="val">Policy violation — isRetryable: false</span></div>
+        <div class="item"><span class="key">permission</span><span class="val">Access denied — isRetryable: false</span></div>
+      </div>
+
+      <div class="cheat-card">
+        <h4>Batch API Facts</h4>
+        <div class="item"><span class="key">Cost</span><span class="val">50% savings vs synchronous</span></div>
+        <div class="item"><span class="key">Window</span><span class="val">Up to 24 hours processing</span></div>
+        <div class="item"><span class="key">SLA</span><span class="val">None guaranteed</span></div>
+        <div class="item"><span class="key">Tools</span><span class="val">No multi-turn tool calling</span></div>
+      </div>
+
+      <div class="cheat-card">
+        <h4>Claude Code CLI Flags</h4>
+        <div class="item"><span class="key">-p</span><span class="val">Non-interactive mode for CI/CD</span></div>
+        <div class="item"><span class="key">--output-format json</span><span class="val">Machine-parseable output</span></div>
+        <div class="item"><span class="key">--json-schema</span><span class="val">Enforce output structure</span></div>
+        <div class="item"><span class="key">--resume</span><span class="val">Continue named session</span></div>
+      </div>
+
+      <div class="cheat-card">
+        <h4>Skill Frontmatter</h4>
+        <div class="item"><span class="key">context: fork</span><span class="val">Isolated sub-agent — output stays in fork</span></div>
+        <div class="item"><span class="key">allowed-tools</span><span class="val">Restrict tools during skill execution</span></div>
+        <div class="item"><span class="key">argument-hint</span><span class="val">Prompt for required parameters</span></div>
+      </div>
+
+      <div class="cheat-card">
+        <h4>Built-in Tools</h4>
+        <div class="item"><span class="key">Grep</span><span class="val">Search file CONTENTS for patterns</span></div>
+        <div class="item"><span class="key">Glob</span><span class="val">Find files by NAME / extension pattern</span></div>
+        <div class="item"><span class="key">Read/Write</span><span class="val">Full file operations</span></div>
+        <div class="item"><span class="key">Edit</span><span class="val">Targeted modifications (unique text)</span></div>
+      </div>
+
+      <div class="cheat-card">
+        <h4>Subagent Rules</h4>
+        <div class="item"><span class="key">Context</span><span class="val">Zero automatic inheritance — inject explicitly</span></div>
+        <div class="item"><span class="key">Parallel</span><span class="val">Multiple Task calls in ONE coordinator response</span></div>
+        <div class="item"><span class="key">allowedTools</span><span class="val">Must include "Task" to spawn subagents</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ EXAM TRAPS ══════════ -->
+<hr class="divider">
+<div class="section" id="trapstable">
+  <div class="section-header" style="background:linear-gradient(135deg,#7f1d1d,#991b1b);">
+    <div class="domain-tag">Must Know</div>
+    <h2>Top 10 Exam Traps</h2>
+  </div>
+  <div class="section-body">
+    <table class="traps-table">
+      <tr><th>#</th><th>The Trap</th><th>Wrong Answer</th><th>Correct Answer</th></tr>
+      <tr><td>1</td><td>Financial rule enforcement</td><td>Add system prompt instruction</td><td>Programmatic hook / prerequisite gate</td></tr>
+      <tr><td>2</td><td>Subagent context</td><td>Inherits coordinator context automatically</td><td>Must explicitly inject context in prompt</td></tr>
+      <tr><td>3</td><td>Batch API for blocking workflows</td><td>50% savings justifies it</td><td>No latency SLA — only for async workloads</td></tr>
+      <tr><td>4</td><td>tool_choice: "auto"</td><td>Guarantees a tool call</td><td>May return text — use "any" or forced selection</td></tr>
+      <tr><td>5</td><td>Research coverage gaps</td><td>Blame synthesis / search agent</td><td>Coordinator's task decomposition is too narrow</td></tr>
+      <tr><td>6</td><td>97% aggregate accuracy</td><td>Safe to remove human review</td><td>Segment by document type and field first</td></tr>
+      <tr><td>7</td><td>Larger context window</td><td>Fixes attention quality</td><td>Multi-pass review fixes depth — not window size</td></tr>
+      <tr><td>8</td><td>User-level CLAUDE.md</td><td>Shared via version control</td><td>Never version controlled — only you see it</td></tr>
+      <tr><td>9</td><td>JSON schema + tool_use</td><td>Prevents all errors</td><td>Eliminates syntax only — not semantic errors</td></tr>
+      <tr><td>10</td><td>Loop termination</td><td>Check text content or use iteration cap</td><td>Only stop_reason == "end_turn" is correct</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ GLOSSARY ══════════ -->
+<div class="section" id="glossary">
+  <div class="section-header" style="background:linear-gradient(135deg,#064e3b,#065f46);">
+    <div class="domain-tag">Reference</div>
+    <h2>Glossary of Key Terms</h2>
+  </div>
+  <div class="section-body">
+    <div class="glossary-grid">
+      <div class="gloss-item"><div class="term">stop_reason</div><div class="def">Signal from Claude indicating why generation stopped. "tool_use" = wants to call a tool. "end_turn" = finished.</div></div>
+      <div class="gloss-item"><div class="term">tool_use</div><div class="def">When Claude decides to call a tool, it returns a response block of type "tool_use" with the tool name and parameters.</div></div>
+      <div class="gloss-item"><div class="term">tool_result</div><div class="def">The message you send back to Claude after executing a requested tool call. Contains the tool's output.</div></div>
+      <div class="gloss-item"><div class="term">tool_choice</div><div class="def">API parameter controlling whether Claude must call a tool ("any"), a specific tool ({type,name}), or may choose freely ("auto").</div></div>
+      <div class="gloss-item"><div class="term">Agentic loop</div><div class="def">The cycle: Claude reasons → requests tool → you execute → you return result → Claude reasons again. Repeats until end_turn.</div></div>
+      <div class="gloss-item"><div class="term">MCP (Model Context Protocol)</div><div class="def">Standard interface for connecting Claude to external tools and data sources. Defines how tools and resources are described and called.</div></div>
+      <div class="gloss-item"><div class="term">Coordinator agent</div><div class="def">The Claude instance that manages overall workflow — task decomposition, subagent delegation, result aggregation, error routing.</div></div>
+      <div class="gloss-item"><div class="term">Subagent</div><div class="def">A separate Claude instance spawned by a coordinator to handle a specific subtask. Has isolated context — no automatic inheritance.</div></div>
+      <div class="gloss-item"><div class="term">Task tool</div><div class="def">The mechanism in the Claude Agent SDK for a coordinator to spawn subagents. Must be in allowedTools.</div></div>
+      <div class="gloss-item"><div class="term">PostToolUse hook</div><div class="def">Intercepts tool results after execution but before Claude processes them. Used for data normalization and format standardization.</div></div>
+      <div class="gloss-item"><div class="term">context: fork</div><div class="def">SKILL.md frontmatter option that runs the skill in an isolated sub-agent context. Verbose output stays in the fork.</div></div>
+      <div class="gloss-item"><div class="term">CLAUDE.md</div><div class="def">Configuration file that Claude Code reads automatically. Contains project conventions, coding standards, and instructions.</div></div>
+      <div class="gloss-item"><div class="term">Path-scoped rules</div><div class="def">.claude/rules/ files with YAML frontmatter paths field containing glob patterns. Load only when editing matching files.</div></div>
+      <div class="gloss-item"><div class="term">@import</div><div class="def">CLAUDE.md syntax for referencing external files, keeping the main file modular and maintainable.</div></div>
+      <div class="gloss-item"><div class="term">Plan mode</div><div class="def">Claude Code mode where Claude explores and proposes an approach without making changes. For complex, multi-file, architectural tasks.</div></div>
+      <div class="gloss-item"><div class="term">fork_session</div><div class="def">Creates independent branches from a shared analysis baseline to explore divergent approaches simultaneously.</div></div>
+      <div class="gloss-item"><div class="term">Lost in the middle</div><div class="def">Phenomenon where LLMs have lower attention fidelity for information positioned in the middle of long inputs.</div></div>
+      <div class="gloss-item"><div class="term">Case facts block</div><div class="def">Structured block of critical transactional facts pinned in the system prompt at position 1 — never buried in conversation history.</div></div>
+      <div class="gloss-item"><div class="term">isError flag</div><div class="def">MCP tool response flag signaling failure to the agent. Enables structured error handling and recovery decisions.</div></div>
+      <div class="gloss-item"><div class="term">isRetryable</div><div class="def">Boolean in structured error responses indicating whether retrying the same request is appropriate.</div></div>
+      <div class="gloss-item"><div class="term">custom_id</div><div class="def">Field in Message Batches API for correlating each request with its response. Used to identify and resubmit failed documents.</div></div>
+      <div class="gloss-item"><div class="term">AgentDefinition</div><div class="def">Configuration object for subagent types in the Claude Agent SDK. Includes system prompts, descriptions, tool restrictions.</div></div>
+      <div class="gloss-item"><div class="term">JSON Schema</div><div class="def">Standard for describing the structure of JSON data. Used in tool input_schema to define what shape of data Claude should produce.</div></div>
+      <div class="gloss-item"><div class="term">Semantic error</div><div class="def">Logically incorrect data that passes schema validation — e.g., line items not summing to total. Requires custom validation code.</div></div>
+      <div class="gloss-item"><div class="term">Nullable field</div><div class="def">Schema field with type: ["string", "null"] allowing Claude to return null when information is absent rather than fabricating a value.</div></div>
+      <div class="gloss-item"><div class="term">Few-shot prompting</div><div class="def">Providing 2-4 concrete examples in the prompt to demonstrate desired output format and judgment for ambiguous cases.</div></div>
+      <div class="gloss-item"><div class="term">Hub-and-spoke</div><div class="def">Multi-agent architecture where a coordinator manages all inter-agent communication, routing, and error handling.</div></div>
+      <div class="gloss-item"><div class="term">/compact</div><div class="def">Claude Code command to reduce context usage during extended sessions when context fills with verbose discovery output.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ REFERENCES ══════════ -->
+<div class="section" id="refs">
+  <div class="section-header" style="background:linear-gradient(135deg,#1e3a5f,#1e40af);">
+    <div class="domain-tag">Online Resources</div>
+    <h2>Official Documentation &amp; References</h2>
+  </div>
+  <div class="section-body">
+    <h3>Anthropic Official Documentation</h3>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <h4>Claude API — Messages</h4>
+        <a href="https://docs.anthropic.com/en/api/messages" target="_blank">docs.anthropic.com/en/api/messages</a>
+        <p>tool_use, stop_reason, tool_choice, max_tokens, system prompt</p>
+      </div>
+      <div class="ref-card">
+        <h4>Tool Use Guide</h4>
+        <a href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use" target="_blank">docs.anthropic.com — tool use</a>
+        <p>Defining tools, JSON schema, reading tool_use responses, tool_choice</p>
+      </div>
+      <div class="ref-card">
+        <h4>Prompt Engineering</h4>
+        <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">docs.anthropic.com — prompt engineering</a>
+        <p>Few-shot prompting, system prompts, structured output, chain of thought</p>
+      </div>
+      <div class="ref-card">
+        <h4>Claude Code Overview</h4>
+        <a href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank">docs.anthropic.com — claude code</a>
+        <p>CLAUDE.md, slash commands, skills, plan mode, MCP integration, CI/CD</p>
+      </div>
+      <div class="ref-card">
+        <h4>Model Context Protocol</h4>
+        <a href="https://modelcontextprotocol.io" target="_blank">modelcontextprotocol.io</a>
+        <p>MCP specification, server configuration, tool and resource design patterns</p>
+      </div>
+      <div class="ref-card">
+        <h4>Message Batches API</h4>
+        <a href="https://docs.anthropic.com/en/docs/build-with-claude/message-batches" target="_blank">docs.anthropic.com — batches</a>
+        <p>Batch processing, custom_id, polling for completion, failure handling</p>
+      </div>
+      <div class="ref-card">
+        <h4>Claude Agent SDK</h4>
+        <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-agent-sdk" target="_blank">docs.anthropic.com — agent SDK</a>
+        <p>AgentDefinition, Task tool, hooks, subagent spawning, allowedTools</p>
+      </div>
+      <div class="ref-card">
+        <h4>Anthropic Console</h4>
+        <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
+        <p>API keys, usage monitoring, billing, Workbench for testing prompts</p>
+      </div>
+    </div>
+
+    <h3>Study Code — GitHub Repository</h3>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <h4>Day 1 — Context Management</h4>
+        <a href="https://github.com/sharvangkumar/claude-architect-prep/tree/main/day1" target="_blank">github.com/sharvangkumar/claude-architect-prep/day1</a>
+        <p>exercise1_lossy.py · exercise2_casefacts.py · exercise3_trimming.py</p>
+      </div>
+      <div class="ref-card">
+        <h4>Day 2 — Structured Output</h4>
+        <a href="https://github.com/sharvangkumar/claude-architect-prep/tree/main/day2" target="_blank">github.com/sharvangkumar/claude-architect-prep/day2</a>
+        <p>exercise1_extraction.py · tool_use · JSON schema · semantic validation</p>
+      </div>
+      <div class="ref-card">
+        <h4>Full Repository</h4>
+        <a href="https://github.com/sharvangkumar/claude-architect-prep" target="_blank">github.com/sharvangkumar/claude-architect-prep</a>
+        <p>All exercises across all 7 study days — beginner-friendly, ~$3 API credits to run</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;padding:48px 24px 32px;border-top:1px solid var(--border);margin-top:32px;">
+  <div style="font-size:20px;font-weight:800;color:var(--accent2);margin-bottom:6px;">Sharvan Kumar</div>
+  <div style="font-size:14px;color:var(--text3);margin-bottom:16px;">Solution Architect | AI Builder</div>
+  <div style="font-size:13px;color:var(--text3);">Claude Certified Architect — Foundations Study Guide · 2025 Edition<br>
+  Built from the official Anthropic exam guide with hands-on exercises and real terminal output.<br><br>
+  <strong>To save as PDF:</strong> Click "Save as PDF" in the navigation bar above.</div>
+</div>
+
+</div><!-- end container -->
+
+<script>
+function sel(el){
+  el.closest('.quiz-item').querySelectorAll('li').forEach(l=>l.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function rev(btn){
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display==='block'?'none':'block';
+  btn.textContent = ans.style.display==='block'?'Hide Answer':'Reveal Answer';
+}
+</script>
+</body>
+</html>
